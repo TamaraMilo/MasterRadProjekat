@@ -24,7 +24,10 @@ class RootCoordinator<Dependency> where Dependency: RootInjectable {
     var view: AnyView {
         AnyView(
             RootView(
-                viewModel: RootViewModel(rootEventTracker: dependency.rootEventTracker),
+                viewModel: RootViewModel(
+                    authWebRepository: dependency.authWebRepository,
+                    rootEventTracker: dependency.rootEventTracker
+                ),
                 loginCoordinator: loginCoordinator,
                 applicationCoordinator: applicationCoordinator
             )
