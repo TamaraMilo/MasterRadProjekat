@@ -10,6 +10,7 @@ import SwiftUI
 struct RootView: View {
     @ObservedObject var viewModel: RootViewModel
     let loginCoordinator: any LoginCoordinable
+    let registerCoordinator: any RegisterCoordinable
     let applicationCoordinator: any ApplicationCoordinable
     
     var body: some View {
@@ -19,7 +20,7 @@ struct RootView: View {
         case .login:
             loginCoordinator.view
         case .register:
-            EmptyView()
+            registerCoordinator.view
         case .application:
             applicationCoordinator.view
         }
@@ -36,6 +37,13 @@ struct RootView: View {
             dependency: LoginDependency(
                 webRepository: AuthWebRepository(),
                 rootEventTracker: RootEventTracker()
+            )
+        ),
+        registerCoordinator: RegisterCoordinator(
+            dependency: RegisterDependency(
+                rootEventTracker: RootEventTracker(),
+                authWebRepository: AuthWebRepository(),
+                userWebRepository: UserWebRepository()
             )
         ),
         applicationCoordinator: ApplicationCoordinator(

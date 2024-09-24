@@ -29,6 +29,7 @@ class RootCoordinator<Dependency> where Dependency: RootInjectable {
                     rootEventTracker: dependency.rootEventTracker
                 ),
                 loginCoordinator: loginCoordinator,
+                registerCoordinator: registerCoordinator,
                 applicationCoordinator: applicationCoordinator
             )
             .environmentObject(dependency.sharedData)
@@ -39,13 +40,27 @@ class RootCoordinator<Dependency> where Dependency: RootInjectable {
 extension RootCoordinator: RootCoordinable {
     
     var loginCoordinator: any LoginCoordinable {
-        let dependency = LoginDependency(webRepository: AuthWebRepository(), rootEventTracker: dependency.rootEventTracker)
+        let dependency = LoginDependency(
+            webRepository: dependency.authWebRepository,
+            rootEventTracker: dependency.rootEventTracker
+        )
         return LoginCoordinator(dependency: dependency)
     }
     
     var applicationCoordinator: any ApplicationCoordinable {
-        let dependency = ApplicationDependency(rootEventTracker: dependency.rootEventTracker)
+        let dependency = ApplicationDependency(
+            rootEventTracker: dependency.rootEventTracker
+        )
         return ApplicationCoordinator(dependency: dependency)
+    }
+    
+    var registerCoordinator: any RegisterCoordinable {
+        let dependency = RegisterDependency(
+            rootEventTracker:dependency.rootEventTracker,
+            authWebRepository: dependency.authWebRepository,
+            userWebRepository: dependency.userWebRepository
+        )
+        return RegisterCoordinator(dependency: dependency)
     }
     
 }

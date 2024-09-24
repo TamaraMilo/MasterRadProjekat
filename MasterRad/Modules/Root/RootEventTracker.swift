@@ -10,6 +10,6 @@ import Combine
 
 class RootEventTracker: ObservableObject {
     let openLoginSubject = PassthroughSubject<Void, Never>()
+    let openRegisterSubject = PassthroughSubject<Void, Never>()
     let openApplicationSubject = PassthroughSubject<Void, Never>()
-    var loggedOut: Bool = false
 }

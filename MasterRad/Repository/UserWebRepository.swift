@@ -1,5 +1,5 @@
 //
-//  UserWebRepostitory.swift
+//  UserWebRepository.swift
 //  MasterRad
 //
 //  Created by Tamara Milovanovic on 24.9.24..
@@ -8,12 +8,13 @@
 import Foundation
 import FirebaseDatabase
 
-protocol UserRepostitory {
+protocol UserRepository {
     var ref: DatabaseReference { get }
     func getUserData(id: String) async -> UserData?
+    func createUser(id: String, name: String, surname: String, age: String)
 }
 
-class UserWebRepostitory: UserRepostitory {
+class UserWebRepository: UserRepository {
     var ref: DatabaseReference = Database.database().reference()
 
     func getUserData(id: String) async -> UserData? {
@@ -28,5 +29,19 @@ class UserWebRepostitory: UserRepostitory {
         } catch {
             return nil
         }
+    }
+    
+    func createUser(id: String, name: String, surname: String, age: String) {
+        ref.child("users")
+            .child(id)
+            .setValue(
+                [
+                    "id": id,
+                    "name": name,
+                    "surname": surname,
+                    "age": age
+                ]
+            )
+        
     }
 }

@@ -30,6 +30,7 @@ final class RootViewModel: ObservableObject {
         self.authWebRepository = authWebRepository
         self.listenForOpenApplication()
         self.listenForOpenLogin()
+        self.listenForOpenRegister()
     }
 }
 
@@ -39,13 +40,19 @@ extension RootViewModel {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in
                 guard let self else { return }
-                self.storeUser()
+                state = .application
             }
             .store(in: &cancelSet)
     }
-   
-    func storeUser() {
-        self.state = .application
+    
+    private func listenForOpenRegister(){
+        rootEventTracker.openRegisterSubject
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] in
+                guard let self else { return }
+                state = .register
+            }
+            .store(in: &cancelSet)
     }
     
     private func listenForOpenLogin() {
@@ -53,24 +60,17 @@ extension RootViewModel {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in
                 guard let self else { return }
-                self.removeVendorAndClientFromDefaults()
+                authWebRepository.signOutUser()
+                state = .login
             }
             .store(in: &cancelSet)
     }
     
-    private func removeVendorAndClientFromDefaults() {
-        handleClientLogout()
-        rootEventTracker.loggedOut = true
-        state = .login
-    }
-    
     private func handleClientLogout() {
-        UserDefaults.standard.removeObject(forKey: "user")
+        authWebRepository.signOutUser()
     }
     
     func checkAuthentication() {
-        if !authWebRepository.isUserLoggedIn {
-            
-        }
+        state = !authWebRepository.isUserLoggedIn ? .login : .application
     }
 }
