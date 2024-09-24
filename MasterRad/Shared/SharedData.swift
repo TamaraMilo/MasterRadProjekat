@@ -22,4 +22,21 @@ enum AppState: Hashable {
 
 class SharedData: ObservableObject {
     @Published var appState: AppState = AppState.initial(.root)
+    @Published var navigationPath = NavigationPath()
+    
+    enum NavigationStates {
+        case training
+        case trainer
+        case profile
+    }
+    
+    func navigate(destination: NavigationStates) {
+        navigationPath.append(destination)
+    }
+    
+    func popChild() {
+        if !navigationPath.isEmpty {
+            navigationPath.removeLast(1)
+        }
+    }
 }

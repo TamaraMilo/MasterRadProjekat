@@ -9,12 +9,42 @@ import SwiftUI
 
 struct ApplicationView: View {
     @ObservedObject var viewModel: ApplicationViewModel
+    @EnvironmentObject var sharedData: SharedData
+    var coordinator: any ApplicationCoordinable
     
     var body: some View {
+        NavigationStack(path: $sharedData.navigationPath) {
+            rootView
+                .navigationDestination(for: SharedData.NavigationStates.self ) { state in
+                    switch state {
+                    case .profile:
+                        profileView
+                    case .trainer:
+                        trainerView
+                    case .training:
+                        trainingView
+                    }
+                }
+        }
+    }
+    
+    var rootView: some View {
         VStack {
             headerView
             trainingDescriptionView
         }
+    }
+    
+    var profileView: some View {
+        coordinator.profileCoordinator.view
+    }
+    
+    var trainerView: some View {
+        coordinator.trainerCoordinator.view
+    }
+    
+    var trainingView: some View {
+        coordinator.trainingCoordinator.view
     }
 }
 
@@ -24,11 +54,15 @@ extension ApplicationView {
     var headerView: some View {
         HStack {
             Text("Cross gym")
-            Button {
-                // Profile
-            } label: {
-                Image(systemName: "dot")
-            }
+            profileButtonView
+        }
+    }
+    
+    var profileButtonView: some View {
+        Button {
+            sharedData.navigate(destination: .profile)
+        } label: {
+            Image(systemName: "brain.head.profile")
         }
     }
 }
@@ -37,14 +71,30 @@ extension ApplicationView {
 
 extension ApplicationView {
     var trainingDescriptionView: some View {
-        VStack {
-            Text("Naziv")
-            Text("Date")
-            Text("Trener")
+        TabView {
+            ForEach(viewModel.trainings) { training in
+                VStack {
+                    Text("Naziv: \(training.name)")
+                    Text("Date: \(training.date)")
+                    Text("Trener: \(training.trainer)")
+                }
+                .onTapGesture {
+                    sharedData.navigate(destination: .training)
+                }
+            }
         }
     }
 }
 
+
+
 #Preview {
-    ApplicationView(viewModel: ApplicationViewModel(rootEventTracker: RootEventTracker()))
+    ApplicationView(
+        viewModel: ApplicationViewModel(rootEventTracker: RootEventTracker()),
+        coordinator: ApplicationCoordinator(
+            dependency: ApplicationDependency(
+                rootEventTracker: RootEventTracker()
+            )
+        )
+    )
 }

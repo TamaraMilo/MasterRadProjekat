@@ -1,5 +1,5 @@
 //
-//  TrainingCoordinator.swift
+//  TrainerCoordinator.swift
 //  MasterRad
 //
 //  Created by Ivan Maksimovic on 24.9.24..
@@ -8,9 +8,9 @@
 import Foundation
 import SwiftUI
 
-protocol TrainingCoordinable: Coordinable {}
+protocol TrainerCoordinable: Coordinable {}
 
-class TrainingCoordinator<Dependency> where Dependency: TrainingDependency {
+class TrainerCoordinator<Dependency> where Dependency: TrainerDependency {
     var dependency: Dependency
 
     init(dependency: Dependency) {
@@ -19,9 +19,9 @@ class TrainingCoordinator<Dependency> where Dependency: TrainingDependency {
     
     var view: AnyView {
         AnyView(
-            TrainingView()
+            TrainerView()
         )
     }
 }
 
-extension TrainingCoordinator: TrainingCoordinable { }
+extension TrainerCoordinator: TrainerCoordinable { }

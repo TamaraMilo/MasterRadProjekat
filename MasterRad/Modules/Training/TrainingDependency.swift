@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+protocol TrainingInjectable {}
+
+final class TrainingDependency: TrainingInjectable {
+    
+}

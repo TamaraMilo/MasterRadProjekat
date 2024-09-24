@@ -16,6 +16,8 @@
 		248F71282CA313C2009011F2 /* AuthWebRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248F71272CA313C2009011F2 /* AuthWebRepository.swift */; };
 		248F714E2CA34FB9009011F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248F714D2CA34FB9009011F2 /* AppDelegate.swift */; };
 		248F71502CA3521A009011F2 /* UserWebRepostitory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248F714F2CA3521A009011F2 /* UserWebRepostitory.swift */; };
+		415D77D22CA354DE009CDBFE /* Training.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415D77D12CA354DE009CDBFE /* Training.swift */; };
+		415D77D42CA35529009CDBFE /* Trainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415D77D32CA35529009CDBFE /* Trainer.swift */; };
 		419E32422CA213D600F26BEA /* MasterRadApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419E32412CA213D600F26BEA /* MasterRadApp.swift */; };
 		419E32462CA213D800F26BEA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 419E32452CA213D800F26BEA /* Assets.xcassets */; };
 		419E32492CA213D800F26BEA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 419E32482CA213D800F26BEA /* Preview Assets.xcassets */; };
@@ -29,6 +31,8 @@
 		248F71272CA313C2009011F2 /* AuthWebRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthWebRepository.swift; sourceTree = "<group>"; };
 		248F714D2CA34FB9009011F2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		248F714F2CA3521A009011F2 /* UserWebRepostitory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserWebRepostitory.swift; sourceTree = "<group>"; };
+		415D77D12CA354DE009CDBFE /* Training.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Training.swift; sourceTree = "<group>"; };
+		415D77D32CA35529009CDBFE /* Trainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trainer.swift; sourceTree = "<group>"; };
 		419E323E2CA213D600F26BEA /* MasterRad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MasterRad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		419E32412CA213D600F26BEA /* MasterRadApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterRadApp.swift; sourceTree = "<group>"; };
 		419E32452CA213D800F26BEA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -60,6 +64,10 @@
 				Root/RootEventTracker.swift,
 				Root/RootView.swift,
 				Root/RootViewModel.swift,
+				Trainer/TrainerCoordinator.swift,
+				Trainer/TrainerDependency.swift,
+				Trainer/TrainerView.swift,
+				Trainer/TrainerViewModel.swift,
 				Training/TrainingCoordinator.swift,
 				Training/TrainingDependency.swift,
 				Training/TrainingView.swift,
@@ -151,6 +159,8 @@
 				419E32622CA2180300F26BEA /* Coordinable.swift */,
 				419E32702CA2210B00F26BEA /* SharedData.swift */,
 				419E32742CA225BA00F26BEA /* UserData.swift */,
+				415D77D12CA354DE009CDBFE /* Training.swift */,
+				415D77D32CA35529009CDBFE /* Trainer.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -232,7 +242,9 @@
 				419E32632CA2180300F26BEA /* Coordinable.swift in Sources */,
 				419E32752CA225BA00F26BEA /* UserData.swift in Sources */,
 				248F714E2CA34FB9009011F2 /* AppDelegate.swift in Sources */,
+				415D77D42CA35529009CDBFE /* Trainer.swift in Sources */,
 				248F71502CA3521A009011F2 /* UserWebRepostitory.swift in Sources */,
+				415D77D22CA354DE009CDBFE /* Training.swift in Sources */,
 				419E32422CA213D600F26BEA /* MasterRadApp.swift in Sources */,
 				419E32712CA2210B00F26BEA /* SharedData.swift in Sources */,
 				248F71282CA313C2009011F2 /* AuthWebRepository.swift in Sources */,

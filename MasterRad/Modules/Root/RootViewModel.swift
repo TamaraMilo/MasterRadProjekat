@@ -70,7 +70,7 @@ extension RootViewModel {
     
     func checkAuthentication() {
         if !authWebRepository.isUserLoggedIn {
-            
+            self.state = .application
         }
     }
 }
