@@ -13,7 +13,7 @@ protocol RegisterInjectable {
     var userWebRepository: UserRepository { get }
 }
 
-final class RegisterDependency: RegisterInjectable {
+final class RegisterDependency: RegisterInjectable  { 
     
     var rootEventTracker: RootEventTracker
     var authWebRepository: AuthRepository
