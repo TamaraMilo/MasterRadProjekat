@@ -10,7 +10,6 @@ import Foundation
 protocol LoginInjectable {
     var rootEventTracker: RootEventTracker { get set }
     var webRepository: AuthRepository { get }
-
 }
 
 final class LoginDependency: LoginInjectable {

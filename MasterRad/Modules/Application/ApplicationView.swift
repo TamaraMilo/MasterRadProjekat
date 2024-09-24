@@ -12,13 +12,35 @@ struct ApplicationView: View {
     
     var body: some View {
         VStack {
-            Text("Application")
-            Button {
-                viewModel.logout()
-            } label: {
-                Text("Logout")
-            }
+            headerView
+            trainingDescriptionView
+        }
+    }
+}
 
+// MARK: Header
+
+extension ApplicationView {
+    var headerView: some View {
+        HStack {
+            Text("Cross gym")
+            Button {
+                // Profile
+            } label: {
+                Image(systemName: "dot")
+            }
+        }
+    }
+}
+
+// MARK: Header
+
+extension ApplicationView {
+    var trainingDescriptionView: some View {
+        VStack {
+            Text("Naziv")
+            Text("Date")
+            Text("Trener")
         }
     }
 }

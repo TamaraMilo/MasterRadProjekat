@@ -69,6 +69,6 @@ extension RootViewModel {
     }
     
     func checkAuthentication() {
-        if webRe
+        
     }
 }

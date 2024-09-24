@@ -14,8 +14,4 @@ final class ApplicationViewModel: ObservableObject {
         self.rootEventTracker = rootEventTracker
     }
 
-    func logout() {
-        rootEventTracker.openLoginSubject.send()
-    }
-
 }
