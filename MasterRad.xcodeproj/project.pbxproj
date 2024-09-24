@@ -12,7 +12,7 @@
 		248F70AE2CA310A2009011F2 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 248F70AD2CA310A2009011F2 /* FirebaseFirestoreCombine-Community */; };
 		248F70B02CA310A2009011F2 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 248F70AF2CA310A2009011F2 /* FirebaseStorage */; };
 		248F70B22CA310A2009011F2 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 248F70B12CA310A2009011F2 /* FirebaseStorageCombine-Community */; };
-		248F71032CA312A6009011F2 /* GoogleService-Info (2).plist in Resources */ = {isa = PBXBuildFile; fileRef = 248F71022CA312A6009011F2 /* GoogleService-Info (2).plist */; };
+		248F71032CA312A6009011F2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 248F71022CA312A6009011F2 /* GoogleService-Info.plist */; };
 		248F71282CA313C2009011F2 /* AuthWebRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248F71272CA313C2009011F2 /* AuthWebRepository.swift */; };
 		419E32422CA213D600F26BEA /* MasterRadApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419E32412CA213D600F26BEA /* MasterRadApp.swift */; };
 		419E32462CA213D800F26BEA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 419E32452CA213D800F26BEA /* Assets.xcassets */; };
@@ -23,7 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		248F71022CA312A6009011F2 /* GoogleService-Info (2).plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info (2).plist"; sourceTree = "<group>"; };
+		248F71022CA312A6009011F2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		248F71272CA313C2009011F2 /* AuthWebRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthWebRepository.swift; sourceTree = "<group>"; };
 		419E323E2CA213D600F26BEA /* MasterRad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MasterRad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		419E32412CA213D600F26BEA /* MasterRadApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterRadApp.swift; sourceTree = "<group>"; };
@@ -80,7 +80,7 @@
 		248F71012CA31240009011F2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				248F71022CA312A6009011F2 /* GoogleService-Info (2).plist */,
+				248F71022CA312A6009011F2 /* GoogleService-Info.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -203,7 +203,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				419E32492CA213D800F26BEA /* Preview Assets.xcassets in Resources */,
-				248F71032CA312A6009011F2 /* GoogleService-Info (2).plist in Resources */,
+				248F71032CA312A6009011F2 /* GoogleService-Info.plist in Resources */,
 				419E32462CA213D800F26BEA /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
