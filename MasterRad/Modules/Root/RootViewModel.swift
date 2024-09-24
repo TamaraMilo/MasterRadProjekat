@@ -25,10 +25,11 @@ final class RootViewModel: ObservableObject {
         case register
     }
     
-    init(authWebRepository: AuthWebRepository, rootEventTracker: RootEventTracker) {
+    init(authWebRepository: AuthRepository, rootEventTracker: RootEventTracker) {
         self.rootEventTracker = rootEventTracker
-        listenForOpenApplication()
-        listenForOpenLogin()
+        self.authWebRepository = authWebRepository
+        self.listenForOpenApplication()
+        self.listenForOpenLogin()
     }
 }
 
@@ -42,9 +43,8 @@ extension RootViewModel {
             }
             .store(in: &cancelSet)
     }
-    
+   
     func storeUser() {
-        UserDefaults.standard.set("user", forKey: "user")
         self.state = .application
     }
     
@@ -69,6 +69,8 @@ extension RootViewModel {
     }
     
     func checkAuthentication() {
-        
+        if !authWebRepository.isUserLoggedIn {
+            
+        }
     }
 }

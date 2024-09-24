@@ -25,7 +25,7 @@ class RootCoordinator<Dependency> where Dependency: RootInjectable {
         AnyView(
             RootView(
                 viewModel: RootViewModel(
-                    authWebRepository: AuthWebRepository(),
+                    authWebRepository: dependency.authWebRepository,
                     rootEventTracker: dependency.rootEventTracker
                 ),
                 loginCoordinator: loginCoordinator,

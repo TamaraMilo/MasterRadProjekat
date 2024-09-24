@@ -26,5 +26,7 @@
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:990004014466:ios:ef039dacdcd14eade8b39b</string>
+	<key>DATABASE_URL</key>
+	<string>https://crossgym-261d5-default-rtdb.europe-west1.firebasedatabase.app</string>
 </dict>
 </plist>

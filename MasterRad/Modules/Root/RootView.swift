@@ -28,7 +28,10 @@ struct RootView: View {
 
 #Preview {
     RootView(
-        viewModel: RootViewModel(authWebRepository: AuthWebRepository(), rootEventTracker: RootEventTracker()),
+        viewModel: RootViewModel(
+            authWebRepository: AuthWebRepository(),
+            rootEventTracker: RootEventTracker()
+        ),
         loginCoordinator: LoginCoordinator(
             dependency: LoginDependency(
                 webRepository: AuthWebRepository(),
