@@ -19,7 +19,7 @@ struct RootView: View {
         case .login:
             loginCoordinator.view
         case .register:
-            re
+            EmptyView()
         case .application:
             applicationCoordinator.view
         }

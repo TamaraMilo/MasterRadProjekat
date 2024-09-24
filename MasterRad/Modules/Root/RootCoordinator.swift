@@ -36,7 +36,7 @@ class RootCoordinator<Dependency> where Dependency: RootInjectable {
 extension RootCoordinator: RootCoordinable {
     
     var loginCoordinator: any LoginCoordinable {
-        let dependency = LoginDependency(rootEventTracker: dependency.rootEventTracker)
+        let dependency = LoginDependency(webRepository: AuthWebRepository(), rootEventTracker: dependency.rootEventTracker)
         return LoginCoordinator(dependency: dependency)
     }
     

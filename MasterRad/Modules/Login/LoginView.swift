@@ -23,8 +23,8 @@ struct LoginView: View {
     }
     var textfieldViews: some View {
         VStack {
-            TextField("Username", text: $viewModel.user.username)
-            TextField("Password", text: $viewModel.user.firstName)
+//            TextField("Username", text: $viewModel.user.username)
+//            TextField("Password", text: $viewModel.user.firstName)
         }
     }
     
@@ -48,5 +48,5 @@ struct LoginView: View {
 }
 
 #Preview {
-    LoginView(viewModel: LoginViewModel(rootEventTracker: RootEventTracker()))
+    LoginView(viewModel: LoginViewModel(webRepository: AuthWebRepository(), rootEventTracker: RootEventTracker()))
 }
