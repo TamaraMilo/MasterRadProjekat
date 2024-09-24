@@ -14,6 +14,7 @@ final class RootViewModel: ObservableObject {
     private var rootEventTracker: RootEventTracker
     private var cancelSet: Set<AnyCancellable> = []
     private let defaults: UserDefaults = UserDefaults.standard
+    private let authWebRepository: AuthRepository
     
     @Published var state: State = .idle
     
@@ -24,7 +25,7 @@ final class RootViewModel: ObservableObject {
         case register
     }
     
-    init(rootEventTracker: RootEventTracker) {
+    init(authWebRepository: AuthWebRepository, rootEventTracker: RootEventTracker) {
         self.rootEventTracker = rootEventTracker
         listenForOpenApplication()
         listenForOpenLogin()
@@ -68,8 +69,6 @@ extension RootViewModel {
     }
     
     func checkAuthentication() {
-        if state == .idle {
-            state = .login
-        }
+        if webRe
     }
 }
