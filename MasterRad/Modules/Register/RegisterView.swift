@@ -1,17 +1,18 @@
 //
-//  LoginView.swift
+//  RegisterView.swift
 //  MasterRad
 //
-//  Created by Ivan Maksimovic on 23.9.24..
+//  Created by Tamara Milovanovic on 24.9.24..
 //
 
 import SwiftUI
 
-struct LoginView: View {
-    @ObservedObject var viewModel: LoginViewModel
+struct RegisterView: View {
     
-    @State private var isPasswordShowing: Bool = false
+    @ObservedObject var viewModel: RegisterViewModel
     @State private var startAnimation: Bool = false
+    @State private var isPasswordShowing: Bool = false
+    @State private var isRepeatPasswordShowing: Bool = false
 
     var body: some View {
         rootView
@@ -22,16 +23,25 @@ struct LoginView: View {
                 }
             }
             .alert(isPresented: $viewModel.showAlert) {
-                Alert(title: Text("Error logging"), message: Text(viewModel.alertText), dismissButton: .default(Text("Cancel")) )
+                Alert(
+                    title: Text("Error logging"),
+                    message: Text(viewModel.alertText),
+                    dismissButton: .default(Text("Cancel"))
+                )
             }
     }
-    
+}
+
+extension RegisterView {
     var rootView: some View {
         VStack(alignment: .center, spacing: 18) {
             crossGymIconView
-            Spacer()
             emailTextFieldView
             passwordView
+            repeatPasswordView
+            nameTextFieldView
+            surnameTextFieldView
+            ageTextFieldView
             singUpTextView
             Spacer()
             singInButtonView
@@ -44,16 +54,17 @@ struct LoginView: View {
         Image(.crossGymHighResolutionLogoTransparent1)
             .resizable()
             .foregroundStyle(.black)
-            .frame(width: 250,height: 250)
+            .frame(width: 170, height: 170)
             .padding(.top, 80)
     }
     
     var emailTextFieldView: some View {
         TextField("Email", text: $viewModel.email)
             .keyboardType(.emailAddress)
-            .padding()
             .foregroundStyle(.black)
+            .padding()
             .background(fieldBackgroundView)
+        
     }
     
     @ViewBuilder
@@ -78,6 +89,7 @@ struct LoginView: View {
                 .onTapGesture {
                     isPasswordShowing = true
                 }
+            
         }
     }
     
@@ -94,13 +106,77 @@ struct LoginView: View {
                 .onTapGesture {
                     isPasswordShowing = false
                 }
+            
         }
     }
     
-    var singUpTextView: some View {
-        Text("Don't have account? Sign up!")
+    @ViewBuilder
+    var repeatPasswordView: some View {
+        if isRepeatPasswordShowing {
+            repeatPasswordTextFieldView
+        } else {
+            hiddenRepeatPasswordView
+        }
+    }
+    
+    var repeatPasswordTextFieldView: some View {
+        HStack {
+            TextField("Repeat password", text: $viewModel.repeatedPassword)
+                .padding()
+                .foregroundStyle(.black)
+                .background(fieldBackgroundView)
+            
+            Spacer()
+            
+            Image(systemName: "eye.slash.fill")
+                .onTapGesture {
+                    isRepeatPasswordShowing = false
+                }
+        }
+    }
+    
+    var hiddenRepeatPasswordView: some View {
+        HStack {
+            SecureField("Repeat password", text: $viewModel.repeatedPassword)
+                .padding()
+                .foregroundStyle(.black)
+                .background(fieldBackgroundView)
+        
+            Spacer()
+            
+            Image(systemName: "eye.fill")
+                .onTapGesture {
+                    isRepeatPasswordShowing = true
+                }
+        }
+    }
+    
+    var nameTextFieldView: some View {
+        TextField("Name", text: $viewModel.name)
+            .padding()
             .foregroundStyle(.black)
-            .onTapGesture(perform: viewModel.openRegisterView)
+            .background(fieldBackgroundView)
+    }
+    
+    var surnameTextFieldView: some View {
+        TextField("Surname", text: $viewModel.surname)
+            .padding()
+            .foregroundStyle(.black)
+            .background(fieldBackgroundView)
+    }
+    
+    var ageTextFieldView: some View {
+        TextField("Age", text: $viewModel.age)
+            .keyboardType(.numberPad)
+            .padding()
+            .foregroundStyle(.black)
+            .background(fieldBackgroundView)
+    }
+    
+    var singUpTextView: some View {
+        Text("Already have account? Sign in!")
+            .foregroundColor(.black)
+            .onTapGesture(perform: viewModel.openLoginView)
     }
     
     var backgroundView: some View {
@@ -116,10 +192,10 @@ struct LoginView: View {
     }
     
     var singInButtonView: some View {
-        Button(action: viewModel.signIn) {
+        Button(action: viewModel.signUp) {
             HStack {
                 Spacer()
-                Text("Sign In")
+                Text("Sign up")
                     .foregroundStyle(.black)
                 Spacer()
             }
@@ -128,9 +204,13 @@ struct LoginView: View {
         .background(fieldBackgroundView)
         .padding(.bottom, 40)
     }
-    
 }
 
 #Preview {
-    LoginView(viewModel: LoginViewModel(webRepository: AuthWebRepository(), rootEventTracker: RootEventTracker()))
+    RegisterView(viewModel: RegisterViewModel(
+        authWebRepository: AuthWebRepository(),
+        userWebRepository: UserWebRepository(),
+        rootEventTracker: RootEventTracker()
+        )
+    )
 }
