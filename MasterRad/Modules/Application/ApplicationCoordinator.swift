@@ -9,7 +9,9 @@ import Foundation
 import SwiftUI
 
 protocol ApplicationCoordinable: Coordinable {
-    
+    var profileCoordinator: any ProfileCoordinable { get }
+    var trainerCoordinator: any TrainerCoordinable { get }
+    var trainingCoordinator: any TrainingCoordinable { get }
 }
 
 class ApplicationCoordinator<Dependency> where Dependency: ApplicationDependency {
@@ -21,11 +23,28 @@ class ApplicationCoordinator<Dependency> where Dependency: ApplicationDependency
     
     var view: AnyView {
         AnyView(
-            ApplicationView(viewModel: ApplicationViewModel(rootEventTracker: dependency.rootEventTracker))
+            ApplicationView(
+                viewModel: ApplicationViewModel(rootEventTracker: dependency.rootEventTracker),
+                coordinator: self
+            )
+//            .environmentObject(dependency.sharedData)
         )
     }
 }
 
 extension ApplicationCoordinator: ApplicationCoordinable {
+    var profileCoordinator: any ProfileCoordinable {
+        let dependency = ProfileDependency(rootEventTracker: dependency.rootEventTracker)
+        return ProfileCoordinator(dependency: dependency)
+    }
+    
+    var trainerCoordinator: any TrainerCoordinable {
+        TrainerCoordinator(dependency: TrainerDependency())
+    }
+    
+    var trainingCoordinator: any TrainingCoordinable {
+        TrainingCoordinator(dependency: TrainingDependency())
+    }
+    
     
 }
