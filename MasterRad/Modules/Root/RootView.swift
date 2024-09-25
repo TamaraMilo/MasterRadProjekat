@@ -47,7 +47,11 @@ struct RootView: View {
             )
         ),
         applicationCoordinator: ApplicationCoordinator(
-            dependency: ApplicationDependency(rootEventTracker: RootEventTracker())
+            dependency: ApplicationDependency(
+                rootEventTracker: RootEventTracker(),
+                userWebRepository: UserWebRepository(),
+                authWebRepository: AuthWebRepository()
+            )
         )
     )
 }

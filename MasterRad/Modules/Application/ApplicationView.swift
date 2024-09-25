@@ -93,7 +93,9 @@ extension ApplicationView {
         viewModel: ApplicationViewModel(rootEventTracker: RootEventTracker()),
         coordinator: ApplicationCoordinator(
             dependency: ApplicationDependency(
-                rootEventTracker: RootEventTracker()
+                rootEventTracker: RootEventTracker(),
+                userWebRepository: UserWebRepository(),
+                authWebRepository: AuthWebRepository()
             )
         )
     )

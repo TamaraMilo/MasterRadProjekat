@@ -21,6 +21,8 @@ class ProfileCoordinator<Dependency> where Dependency: ProfileDependency {
         AnyView(
             ProfileView(
                 viewModel: ProfileViewModel(
+                    userWebRepository: dependency.userWebRepository,
+                    authWebRepository: dependency.authWebRepository,
                     rootEventTracker: dependency.rootEventTracker
                 )
             )

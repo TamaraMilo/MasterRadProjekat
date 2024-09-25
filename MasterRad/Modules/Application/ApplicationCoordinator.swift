@@ -34,7 +34,11 @@ class ApplicationCoordinator<Dependency> where Dependency: ApplicationDependency
 
 extension ApplicationCoordinator: ApplicationCoordinable {
     var profileCoordinator: any ProfileCoordinable {
-        let dependency = ProfileDependency(rootEventTracker: dependency.rootEventTracker)
+        let dependency = ProfileDependency(
+            userWebRepository: dependency.userWebRepository,
+            authWebRepository: dependency.authWebRepository,
+            rootEventTracker: dependency.rootEventTracker
+        )
         return ProfileCoordinator(dependency: dependency)
     }
     

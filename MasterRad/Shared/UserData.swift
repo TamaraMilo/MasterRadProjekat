@@ -8,25 +8,29 @@
 import Foundation
 
 struct UserData: Decodable {
-    let id: Int
+    let id: String
     var firstName: String
     var lastName: String
     var email: String
+    var age: String
+    
     var username: String
     
-    init(id: Int, firstName: String, lastName: String, email: String, username: String) {
+    init(id: String, firstName: String, lastName: String, email: String, username: String, age: String) {
         self.id = id
         self.firstName = firstName
         self.lastName = lastName
         self.email = email
         self.username = username
+        self.age = age
     }
     
     init() {
-        id = 0
+        id = ""
         firstName = ""
         lastName = ""
         email = ""
         username = ""
+        age = ""
     }
 }
