@@ -11,6 +11,8 @@ struct ApplicationView: View {
     @ObservedObject var viewModel: ApplicationViewModel
     @EnvironmentObject var sharedData: SharedData
     var coordinator: any ApplicationCoordinable
+    
+    @State private var startAnimation: Bool = false
     @State var training: Training?
     @State var trainer: Trainer?
     
@@ -35,6 +37,12 @@ struct ApplicationView: View {
             headerView
             trainingDescriptionView
         }
+        .background(backgroundView)
+        .onAppear {
+            withAnimation(.linear(duration: 5.0).repeatForever()) {
+                startAnimation.toggle()
+            }
+        }
     }
     
     var profileView: some View {
@@ -54,16 +62,35 @@ struct ApplicationView: View {
             coordinator.makeTrainingCoordinator(training: training).view
         }
     }
+    
+    var backgroundView: some View {
+        LinearGradient( colors: [.purple, .blue],
+                        startPoint: startAnimation ? .topLeading : .bottomLeading,
+                        endPoint: startAnimation ? .bottomTrailing : .topTrailing
+                    )
+        .ignoresSafeArea()
+    }
 }
 
 // MARK: Header
 
 extension ApplicationView {
     var headerView: some View {
-        HStack {
+        HStack(alignment: .center) {
+            Image(.crossGymHighResolutionLogoTransparent1)
+                .renderingMode(.template)
+                .resizable()
+                .foregroundStyle(.white)
+                .frame(width: 50, height: 50)
+
             Text("Cross gym")
+                .font(.headline)
+                .foregroundStyle(.white)
+            Spacer()
             profileButtonView
         }
+        .padding(.horizontal, 20)
+        .padding(.top, 20)
     }
     
     var profileButtonView: some View {
@@ -71,6 +98,10 @@ extension ApplicationView {
             sharedData.navigate(destination: .profile)
         } label: {
             Image(systemName: "brain.head.profile")
+                .renderingMode(.template)
+                .resizable()
+                .foregroundStyle(.white)
+                .frame(width: 25, height: 25)
         }
     }
 }
@@ -80,13 +111,41 @@ extension ApplicationView {
 extension ApplicationView {
     var trainingDescriptionView: some View {
         TabView(selection: $viewModel.currentTab) {
-            ForEach(viewModel.trainings) { training in
+            ForEach(viewModel.days) { day in
+                VStack(spacing: 30) {
+                    Text(day.name)
+                        .foregroundStyle(.white)
+                        .font(.title)
+                        .padding(.vertical, 20)
+                    makeTrainingDescription(trainings: day.trainings)
+                }
+                .tag(day.id)
+            }
+        }
+        .id(viewModel.currentTab)
+        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+    }
+    
+    func makeTrainingDescription(trainings: [Training]) -> some View {
+        ScrollView {
+            ForEach(trainings) { training in
                 VStack {
                     Text("Naziv: \(training.name)")
-                    Text("Date: \(training.date)")
-                    Text("Trener: \(training.trainer)")
+                    Text("Date: \(training.time)")
+                    Text("Trener: \(training.trainer.fistName)")
                 }
-                .tag(training.id)
+                .frame(
+                    width: UIScreen.main.bounds.width * 0.9,
+                    height: UIScreen.main.bounds.height * 0.1
+                )
+                .background(
+                    RoundedRectangle(cornerRadius: 10)
+                        .foregroundStyle(.white)
+                        .frame(
+                            width: UIScreen.main.bounds.width * 0.9,
+                            height: UIScreen.main.bounds.height * 0.1
+                        )
+                )
                 .onTapGesture {
                     self.training = training
                     self.trainer = training.trainer
@@ -94,9 +153,8 @@ extension ApplicationView {
                 }
             }
         }
-        .id(viewModel.currentTab)
-        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
     }
+    
 }
 
 
