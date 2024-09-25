@@ -22,4 +22,30 @@ struct Training: Identifiable, Hashable {
     public func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
+    
+    init(id: Int, name: String, date: String, time: String, trainer: Trainer, description: String, participants: [UserData]) {
+        self.id = id
+        self.name = name
+        self.date = date
+        self.time = time
+        self.trainer = trainer
+        self.description = description
+        self.participants = participants
+    }
+    
+    init() {
+        id = 0
+        name = ""
+        date = ""
+        time = ""
+        trainer = Trainer(
+            id: 0,
+            fistName: "",
+            lastName: "",
+            trainings: [],
+            biography: ""
+        )
+        description = ""
+        participants = []
+    }
 }

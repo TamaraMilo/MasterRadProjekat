@@ -12,6 +12,8 @@ final class TreningViewModel: ObservableObject {
     
     @Published var state: State = .idle
     @Binding var training: Training
+    @Published var training2: Training
+    @Published var isAlreadyInTraining:Bool = false
     
     private var userWebRepository: UserRepository
     private var authWebRepository: AuthRepository
@@ -26,10 +28,24 @@ final class TreningViewModel: ObservableObject {
         self.userWebRepository = userWebRepository
         self.authWebRepository = authWebRepository
         self._training = training
+        self.training2 = training.wrappedValue
     }
     
     func addUserToTrain() {
-        training.participants.append(user)
+        if training2.participants.contains(where: { $0.id == user.id}) {
+            print("Already signed")
+            isAlreadyInTraining = true
+        } else {
+            training2.participants.append(user)
+            isAlreadyInTraining = true
+            training.participants.append(user)
+        }
+        print(training.participants)
+    }
+    
+    func removeUserFromTraining() {
+        training2.participants.removeAll(where: { $0.id == user.id })
+        isAlreadyInTraining = false
     }
     
     @MainActor

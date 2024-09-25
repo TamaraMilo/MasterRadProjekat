@@ -13,7 +13,7 @@ struct ApplicationView: View {
     var coordinator: any ApplicationCoordinable
     
     @State private var startAnimation: Bool = false
-    @State var training: Training?
+    @State var training: Training = Training()
     @State var trainer: Trainer?
     
     var body: some View {
@@ -58,9 +58,7 @@ struct ApplicationView: View {
     
     @ViewBuilder
     var trainingView: some View {
-        if let training {
-            coordinator.makeTrainingCoordinator(training: training).view
-        }
+        coordinator.makeTrainingCoordinator(training: $training).view
     }
     
     var backgroundView: some View {

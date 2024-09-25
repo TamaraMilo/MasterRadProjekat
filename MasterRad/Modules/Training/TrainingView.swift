@@ -74,7 +74,7 @@ struct TrainingView: View {
     
     var dateAndTimeView: some View {
         VStack(alignment: .leading) {
-            dateView
+//            dateView
             timeView
         }
         .padding(.horizontal, 16)
@@ -116,7 +116,8 @@ struct TrainingView: View {
                     .font(.headline)
             }
             .onTapGesture {
-                sharedData.navigate(destination: .trainer)
+                //TODO: Implement Trainer profile
+//                sharedData.navigate(destination: .trainer)
             }
             Spacer()
         }
@@ -161,14 +162,15 @@ struct TrainingView: View {
             Text("Samo najhrabriji ucestvuju: ")
                 .font(.title2)
             Divider()
-
-            ForEach(viewModel.training.participants) { user in
-                HStack {
-                    Text(viewModel.user.firstName)
-                        .font(.headline)
-                    Text(viewModel.user.lastName)
-                        .font(.headline)
-                    Divider()
+            ScrollView {
+                ForEach(viewModel.training2.participants) { user in
+                    HStack {
+                        Text(user.firstName)
+                            .font(.headline)
+                        Text(user.lastName)
+                            .font(.headline)
+                        Divider()
+                    }
                 }
             }
         }
@@ -178,11 +180,22 @@ struct TrainingView: View {
     }
     
     var plusButtonView: some View {
-        Button(action: viewModel.addUserToTrain) {
-            Image(systemName: "plus")
-                .frame(width: 30, height: 30)
-                .background(Circle().fill(.white))
+        if viewModel.isAlreadyInTraining {
+            Button(action: viewModel.removeUserFromTraining) {
+                Image(systemName: "minus")
+                    .frame(width: 50, height: 50)
+                    .background(Circle().fill(.white).shadow(color: .purple, radius: 1))
+            }
+            .padding(.all, 20)
+        } else {
+            Button(action: viewModel.addUserToTrain) {
+                Image(systemName: "plus")
+                    .frame(width: 50, height: 50)
+                    .background(Circle().fill(.white).shadow(color: .purple, radius: 1))
+            }
+            .padding(.all, 20)
         }
+       
 
     }
 }

@@ -123,7 +123,7 @@ extension Training {
                biography: "Capcarap"
            ),
            description: "1000 i 10000 sklekova",
-           participants: []
+           participants: UserData.fixtureParticipants()
            )
     }
     
@@ -141,7 +141,7 @@ extension Training {
                biography: "Capcarap"
            ),
            description: "1000 i 10000 sklekova",
-           participants: []
+           participants: UserData.fixtureParticipants()
            )
     }
     
@@ -159,7 +159,7 @@ extension Training {
                biography: "Capcarap"
            ),
            description: "1000 i 10000 sklekova",
-           participants: []
+           participants: UserData.fixtureParticipants()
            )
     }
     
@@ -177,7 +177,7 @@ extension Training {
                biography: "Capcarap"
            ),
            description: "1000 i 10000 sklekova",
-           participants: []
+           participants: UserData.fixtureParticipants()
            )
     }
     
@@ -195,7 +195,7 @@ extension Training {
                biography: "Capcarap"
            ),
            description: "1000 i 10000 sklekova",
-           participants: []
+           participants: UserData.fixtureParticipants()
            )
     }
     
@@ -213,7 +213,7 @@ extension Training {
                biography: "Capcarap"
            ),
            description: "1000 i 10000 sklekova",
-           participants: []
+           participants: UserData.fixtureParticipants()
            )
     }
     static func fixtureTraining7() -> Training {
@@ -230,7 +230,7 @@ extension Training {
                biography: "Capcarap"
            ),
            description: "1000 i 10000 sklekova",
-           participants: []
+           participants: UserData.fixtureParticipants()
            )
     }
     static func fixtureTraining8() -> Training {
@@ -247,7 +247,7 @@ extension Training {
                biography: "Capcarap"
            ),
            description: "1000 i 10000 sklekova",
-           participants: []
+           participants: UserData.fixtureParticipants()
            )
     }
     static func fixtureTraining9() -> Training {
@@ -264,7 +264,7 @@ extension Training {
                biography: "Capcarap"
            ),
            description: "1000 i 10000 sklekova",
-           participants: []
+           participants: UserData.fixtureParticipants()
            )
     }
     static func fixtureTraining10() -> Training {
@@ -281,7 +281,7 @@ extension Training {
                biography: "Capcarap"
            ),
            description: "1000 i 10000 sklekova",
-           participants: []
+           participants: UserData.fixtureParticipants()
            )
     }
     static func fixtureTraining11() -> Training {
@@ -298,7 +298,7 @@ extension Training {
                biography: "Capcarap"
            ),
            description: "1000 i 10000 sklekova",
-           participants: []
+           participants: UserData.fixtureParticipants()
            )
     }
     static func fixtureTraining12() -> Training {
@@ -315,7 +315,7 @@ extension Training {
                biography: "Capcarap"
            ),
            description: "1000 i 10000 sklekova",
-           participants: []
+           participants: UserData.fixtureParticipants()
            )
     }
     static func fixtureTraining13() -> Training {
@@ -332,7 +332,7 @@ extension Training {
                biography: "Capcarap"
            ),
            description: "1000 i 10000 sklekova",
-           participants: []
+           participants: UserData.fixtureParticipants()
            )
     }
     static func fixtureTraining14() -> Training {
@@ -349,8 +349,43 @@ extension Training {
                biography: "Capcarap"
            ),
            description: "1000 i 10000 sklekova",
-           participants: []
+           participants: UserData.fixtureParticipants()
            )
-    } 
+    }
+}
 
+extension UserData {
+    static func fixtureParticipants() -> [UserData] {
+        [
+            fixtureUser(),
+            fixtureUser1(),
+            fixtureUser2(),
+            fixtureUser3(),
+            fixtureUser4(),
+            fixtureUser()
+        ]
+    }
+    
+    static func fixtureUser() -> UserData {
+        UserData(id: "0", firstName: "Jovana", lastName: "Petrovic", age: "43")
+    }
+    
+    static func fixtureUser1() -> UserData {
+        UserData(id: "1", firstName: "Katarina", lastName: "Aleksic", age: "27")
+    }
+    static func fixtureUser2() -> UserData {
+        UserData(id: "2", firstName: "Nikola", lastName: "Jovanovic", age: "21")
+    }
+    
+    static func fixtureUser3() -> UserData {
+        UserData(id: "3", firstName: "Marko", lastName: "Andjelkovic", age: "36")
+    }
+    
+    static func fixtureUser4() -> UserData {
+        UserData(id: "4", firstName: "Nikola", lastName: "Nikolic", age: "34")
+    }
+    
+    static func fixtureUser5() -> UserData {
+        UserData(id: "5", firstName: "Aleksandar", lastName: "Jovanovic", age: "30")
+    }
 }
