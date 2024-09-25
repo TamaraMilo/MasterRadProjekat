@@ -11,12 +11,13 @@ import Combine
 
 final class RootViewModel: ObservableObject {
     
+    @Published var state: State = .idle
+    
     private var rootEventTracker: RootEventTracker
     private var cancelSet: Set<AnyCancellable> = []
     private let defaults: UserDefaults = UserDefaults.standard
     private let authWebRepository: AuthRepository
     
-    @Published var state: State = .idle
     
     enum State {
         case idle

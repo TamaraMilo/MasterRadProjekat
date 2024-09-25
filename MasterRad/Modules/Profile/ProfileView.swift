@@ -37,7 +37,8 @@ struct ProfileView: View {
         VStack(spacing: 5) {
             Image(.crossGymHighResolutionLogoTransparent1)
                 .resizable()
-                .frame(width: 100, height: 100)
+                .frame(width: 130, height: 130)
+            Spacer()
             nameView
             surnameView
             ageView

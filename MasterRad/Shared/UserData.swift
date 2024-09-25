@@ -11,17 +11,12 @@ struct UserData: Decodable, Identifiable {
     let id: String
     var firstName: String
     var lastName: String
-    var email: String
     var age: String
-    
-    var username: String
-    
-    init(id: String, firstName: String, lastName: String, email: String, username: String, age: String) {
+        
+    init(id: String, firstName: String, lastName: String, age: String) {
         self.id = id
         self.firstName = firstName
         self.lastName = lastName
-        self.email = email
-        self.username = username
         self.age = age
     }
     
@@ -29,8 +24,6 @@ struct UserData: Decodable, Identifiable {
         id = ""
         firstName = ""
         lastName = ""
-        email = ""
-        username = ""
         age = ""
     }
 }
