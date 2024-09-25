@@ -11,6 +11,8 @@ struct ApplicationView: View {
     @ObservedObject var viewModel: ApplicationViewModel
     @EnvironmentObject var sharedData: SharedData
     var coordinator: any ApplicationCoordinable
+    @State var training: Training?
+    @State var trainer: Trainer?
     
     var body: some View {
         NavigationStack(path: $sharedData.navigationPath) {
@@ -39,12 +41,18 @@ struct ApplicationView: View {
         coordinator.profileCoordinator.view
     }
     
+    @ViewBuilder
     var trainerView: some View {
-        coordinator.trainerCoordinator.view
+        if let trainer {
+            coordinator.makeTrainerCoordinator(trainer: trainer).view
+        }
     }
     
+    @ViewBuilder
     var trainingView: some View {
-        coordinator.trainingCoordinator.view
+        if let training {
+            coordinator.makeTrainingCoordinator(training: training).view
+        }
     }
 }
 
@@ -71,18 +79,23 @@ extension ApplicationView {
 
 extension ApplicationView {
     var trainingDescriptionView: some View {
-        TabView {
+        TabView(selection: $viewModel.currentTab) {
             ForEach(viewModel.trainings) { training in
                 VStack {
                     Text("Naziv: \(training.name)")
                     Text("Date: \(training.date)")
                     Text("Trener: \(training.trainer)")
                 }
+                .tag(training.id)
                 .onTapGesture {
+                    self.training = training
+                    self.trainer = training.trainer
                     sharedData.navigate(destination: .training)
                 }
             }
         }
+        .id(viewModel.currentTab)
+        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
     }
 }
 
