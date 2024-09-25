@@ -8,48 +8,180 @@
 import SwiftUI
 
 struct TrainingView: View {
+    
+    @ObservedObject var viewModel: TreningViewModel
     @EnvironmentObject var sharedData: SharedData
-    var training: Training
+    @State private var startAnimation: Bool = false
+
     
     var body: some View {
-        VStack {
-            dateAndTimeView
-            Text(training.name)
-            trainerView
-            participantsView
+        rootView
+        .onAppear {
+            withAnimation(.linear(duration: 5.0).repeatForever()) {
+                startAnimation.toggle()
+            }
+        }
+    }
+    
+    @ViewBuilder
+    var rootView: some View {
+        switch viewModel.state {
+        case .idle:
+            Color.clear.task {
+                await viewModel.fetchUserData()
+            }
+        case .loading:
+            ProgressView()
+        case .ready:
+            readyView
+        case .error:
+            Color.red
+        }
+    }
+    
+    var readyView: some View {
+        ZStack(alignment: .bottomTrailing) {
+            backgroundView
+                .ignoresSafeArea()
+            contentView
             plusButtonView
         }
+        .onAppear {
+            withAnimation(.linear(duration: 5.0).repeatForever()) {
+                startAnimation.toggle()
+            }
+        }
+    }
+    
+    var contentView: some View {
+        VStack(alignment: .leading) {
+            dateAndTimeView
+            trainingNameView
+            trainerView
+            descriptionView
+            participantsView
+            Spacer()
+        }
+        .padding(.horizontal, 16)
+    }
+    
+    var backgroundView: some View {
+        LinearGradient( colors: [.purple, .blue],
+                        startPoint: startAnimation ? .topLeading : .bottomLeading,
+                        endPoint: startAnimation ? .bottomTrailing : .topTrailing
+        )
     }
     
     var dateAndTimeView: some View {
+        VStack(alignment: .leading) {
+            dateView
+            timeView
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 8)
+        
+        .background(RoundedRectangle(cornerRadius: 12).fill(.white))
+    }
+    
+    var dateView: some View {
         HStack {
-            Text(training.date)
-            Text(training.time)
+            Text("Date: ")
+                .font(.title)
+            Text(viewModel.training.date)
+                .font(.title)
+            Spacer()
         }
     }
     
+    var timeView: some View {
+        HStack {
+            Text("Time:")
+                .font(.title)
+            Text(viewModel.training.time)
+                .font(.title)
+            Spacer()
+            
+        }
+    }
+    
+    
     var trainerView: some View {
-        Text(training.trainer.fistName)
+        HStack {
+            Text("Trener: ")
+                .font(.headline)
+            HStack {
+                Text(viewModel.training.trainer.fistName)
+                    .font(.headline)
+                Text(viewModel.training.trainer.lastName)
+                    .font(.headline)
+            }
             .onTapGesture {
                 sharedData.navigate(destination: .trainer)
             }
+            Spacer()
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 8)
+        .background(RoundedRectangle(cornerRadius: 12).fill(.white))
     }
     
     var descriptionView: some View {
-        Text(training.description)
+        
+        HStack {
+            VStack(alignment: .leading, spacing: 6) {
+                Text("Trening u planu:")
+                    .font(.title2)
+                Divider()
+                Text(viewModel.training.description)
+                    .font(.headline)
+            }
+            Spacer()
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 8)
+        .background(RoundedRectangle(cornerRadius: 12).fill(.white))
+        
+    }
+    
+    var trainingNameView: some View {
+        HStack {
+            Text("Trening: ")
+                .font(.title2)
+            Text(viewModel.training.name)
+                .font(.title2)
+            Spacer()
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 8)
+        .background(RoundedRectangle(cornerRadius: 12).fill(.white))
     }
     
     var participantsView: some View {
-        ForEach(training.participants) { user in
-            Text(user.firstName)
+        VStack(alignment: .leading, spacing: 6) {
+            Text("Samo najhrabriji ucestvuju: ")
+                .font(.title2)
+            Divider()
+
+            ForEach(viewModel.training.participants) { user in
+                HStack {
+                    Text(viewModel.user.firstName)
+                        .font(.headline)
+                    Text(viewModel.user.lastName)
+                        .font(.headline)
+                    Divider()
+                }
+            }
         }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 8)
+        .background(RoundedRectangle(cornerRadius: 12).fill(.white))
     }
     
     var plusButtonView: some View {
-        Button {
-            
-        } label: {
+        Button(action: viewModel.addUserToTrain) {
             Image(systemName: "plus")
+                .frame(width: 30, height: 30)
+                .background(Circle().fill(.white))
         }
 
     }

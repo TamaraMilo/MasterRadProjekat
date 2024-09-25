@@ -9,6 +9,7 @@ import SwiftUI
 
 struct RootView: View {
     @ObservedObject var viewModel: RootViewModel
+    
     let loginCoordinator: any LoginCoordinable
     let registerCoordinator: any RegisterCoordinable
     let applicationCoordinator: any ApplicationCoordinable

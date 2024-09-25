@@ -6,15 +6,23 @@
 //
 
 import Foundation
+import SwiftUI
 
 protocol TrainingInjectable {
-    var training: Training { get }
+    var userWebRepository: UserRepository { get }
+    var authWebRepository: AuthRepository { get }
 }
 
 final class TrainingDependency: TrainingInjectable {
-    var training: Training
-    
-    init(training: Training) {
-        self.training = training
+
+    var userWebRepository: UserRepository
+    var authWebRepository: AuthRepository
+
+    init(
+        authWebRepository: AuthRepository,
+        userWebRepository: UserRepository
+    ) {
+        self.authWebRepository = authWebRepository
+        self.userWebRepository = userWebRepository
     }
 }

@@ -12,14 +12,22 @@ protocol TrainingCoordinable: Coordinable {}
 
 class TrainingCoordinator<Dependency> where Dependency: TrainingDependency {
     var dependency: Dependency
+    @Binding var training: Training
 
-    init(dependency: Dependency) {
+    init(dependency: Dependency, training: Binding<Training>) {
         self.dependency = dependency
+        self._training = training
     }
     
     var view: AnyView {
         AnyView(
-            TrainingView(training: dependency.training)
+            TrainingView(
+                viewModel: TreningViewModel(
+                    userWebRepository: dependency.userWebRepository,
+                    authWebRepository: dependency.authWebRepository,
+                    training: $training
+                )
+            )
         )
     }
 }
