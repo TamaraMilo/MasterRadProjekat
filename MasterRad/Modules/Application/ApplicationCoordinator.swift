@@ -10,8 +10,8 @@ import SwiftUI
 
 protocol ApplicationCoordinable: Coordinable {
     var profileCoordinator: any ProfileCoordinable { get }
-    var trainerCoordinator: any TrainerCoordinable { get }
-    var trainingCoordinator: any TrainingCoordinable { get }
+    func makeTrainerCoordinator(trainer: Trainer) -> any TrainerCoordinable
+    func makeTrainingCoordinator(training: Training) -> any TrainingCoordinable
 }
 
 class ApplicationCoordinator<Dependency> where Dependency: ApplicationDependency {
@@ -42,13 +42,11 @@ extension ApplicationCoordinator: ApplicationCoordinable {
         return ProfileCoordinator(dependency: dependency)
     }
     
-    var trainerCoordinator: any TrainerCoordinable {
-        TrainerCoordinator(dependency: TrainerDependency())
+    func makeTrainerCoordinator(trainer: Trainer) -> any TrainerCoordinable {
+        TrainerCoordinator(dependency: TrainerDependency(trainer: trainer))
     }
     
-    var trainingCoordinator: any TrainingCoordinable {
-        TrainingCoordinator(dependency: TrainingDependency())
+    func makeTrainingCoordinator(training: Training) -> any TrainingCoordinable {
+        TrainingCoordinator(dependency: TrainingDependency(training: training))
     }
-    
-    
 }

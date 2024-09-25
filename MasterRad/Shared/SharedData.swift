@@ -24,7 +24,7 @@ class SharedData: ObservableObject {
     @Published var appState: AppState = AppState.initial(.root)
     @Published var navigationPath = NavigationPath()
     
-    enum NavigationStates {
+    enum NavigationStates: Hashable {
         case training
         case trainer
         case profile
