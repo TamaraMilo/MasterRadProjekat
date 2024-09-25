@@ -131,7 +131,7 @@ extension ApplicationView {
             ForEach(trainings) { training in
                 VStack {
                     Text("Naziv: \(training.name)")
-                    Text("Date: \(training.time)")
+                    Text("Vreme: \(training.time)")
                     Text("Trener: \(training.trainer.fistName)")
                 }
                 .frame(
