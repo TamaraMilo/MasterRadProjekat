@@ -19,7 +19,7 @@ class TrainerCoordinator<Dependency> where Dependency: TrainerDependency {
     
     var view: AnyView {
         AnyView(
-            TrainerView()
+            TrainerView(trainer: dependency.trainer)
         )
     }
 }
