@@ -81,7 +81,8 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		248F71062CA31337009011F2 /* Modules */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (248F71112CA3133D009011F2 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Modules; sourceTree = "<group>"; };
+		248F71062CA31337009011F2 /* Client */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (248F71112CA3133D009011F2 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Client; sourceTree = "<group>"; };
+		418015D72CA84624001A1A6C /* Vendor */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Vendor; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,7 +139,8 @@
 			children = (
 				248F714D2CA34FB9009011F2 /* AppDelegate.swift */,
 				248F71262CA3136E009011F2 /* Repository */,
-				248F71062CA31337009011F2 /* Modules */,
+				248F71062CA31337009011F2 /* Client */,
+				418015D72CA84624001A1A6C /* Vendor */,
 				419E326F2CA220F200F26BEA /* Shared */,
 				419E32412CA213D600F26BEA /* MasterRadApp.swift */,
 				419E32452CA213D800F26BEA /* Assets.xcassets */,
