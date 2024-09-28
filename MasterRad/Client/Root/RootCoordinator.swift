@@ -11,6 +11,7 @@ import SwiftUI
 protocol RootCoordinable: Coordinable {
     var loginCoordinator: any LoginCoordinable { get }
     var applicationCoordinator: any ApplicationCoordinable { get }
+    var vendorCoordinator: any VendorCoordinable { get }
 }
 
 class RootCoordinator<Dependency> where Dependency: RootInjectable {
@@ -30,7 +31,8 @@ class RootCoordinator<Dependency> where Dependency: RootInjectable {
                 ),
                 loginCoordinator: loginCoordinator,
                 registerCoordinator: registerCoordinator,
-                applicationCoordinator: applicationCoordinator
+                applicationCoordinator: applicationCoordinator,
+                vendorCoordinator: vendorCoordinator
             )
             .environmentObject(dependency.sharedData)
         )
@@ -65,5 +67,9 @@ extension RootCoordinator: RootCoordinable {
         return RegisterCoordinator(dependency: dependency)
     }
     
+    var vendorCoordinator: any VendorCoordinable {
+        let dependency = VendorDependency(sharedData: VendorSharedData())
+        return VendorCoordinator(dependency: dependency)
+    }
 }
 
