@@ -21,16 +21,18 @@ struct CreateTrainingView: View {
     }
     
     var rootView: some View {
-        VStack(spacing: 20) {
-            headerView
-            Spacer()
-            dateView
-            nameView
-            timeView
-            descriptionView
-            trainerView
-            createButtonView
-            Spacer()
+        ScrollView {
+            VStack(spacing: 20) {
+                headerView
+                Spacer()
+                dateView
+                nameView
+                timeView
+                descriptionView
+                trainerView
+                createButtonView
+                Spacer()
+            }
         }
         .padding(.horizontal, 15)
     }
