@@ -9,16 +9,34 @@ import SwiftUI
 
 struct TrainingListView: View {
     @State private var startAnimation: Bool = false
-    @ObservedObject var viewModel: TrainingListViewModel = TrainingListViewModel()
+    @ObservedObject var viewModel: TrainingListViewModel
     
     var body: some View {
-        ZStack {
-            backgroundView
-            rootView
+        rootView
+    }
+    
+    @ViewBuilder
+    var rootView: some View {
+        switch viewModel.state {
+        case .idle:
+            Color.clear.onAppear(perform: viewModel.fetchTrainings)
+        case .loading:
+            ProgressView()
+        case .ready:
+            readyView
+        case .error:
+            Color.red
         }
     }
     
-    var rootView: some View {
+    var readyView: some View {
+        ZStack {
+            backgroundView
+            contentView
+        }
+    }
+    
+    var contentView: some View {
         VStack {
             headerView
             Spacer()
@@ -93,5 +111,9 @@ struct TrainingListView: View {
 }
 
 #Preview {
-    TrainingListView()
+    TrainingListView(
+        viewModel: TrainingListViewModel(
+            trainingWebRepository: TrainingWebRepository()
+        )
+    )
 }

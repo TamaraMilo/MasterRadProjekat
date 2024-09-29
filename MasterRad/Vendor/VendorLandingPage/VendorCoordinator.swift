@@ -40,7 +40,9 @@ extension VendorCoordinator: VendorCoordinable {
     }
     
     var trainingListCoordinator: any TrainingListCoordinable {
-        let dependency = TrainingListDependency()
+        let dependency = TrainingListDependency(
+            trainingWebRepository: dependency.trainingWebRepository
+        )
         return TrainingListCoordinator(dependency: dependency)
     }
     

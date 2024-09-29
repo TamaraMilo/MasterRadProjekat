@@ -63,7 +63,8 @@ struct RootView: View {
             dependency: VendorDependency(
                 sharedData: VendorSharedData(),
                 rootEventTracker: RootEventTracker(),
-                authWebRepository: AuthWebRepository()
+                authWebRepository: AuthWebRepository(),
+                trainingWebRepository: TrainingWebRepository()
             )
         )
     )

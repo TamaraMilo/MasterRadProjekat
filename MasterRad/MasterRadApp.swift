@@ -18,11 +18,13 @@ struct MasterRadApp: App {
         let sharedData: SharedData = SharedData()
         let authWebRepository: AuthWebRepository = AuthWebRepository()
         let userWebRepository: UserWebRepository = UserWebRepository()
+        let trainingWebRepository = TrainingWebRepository()
         let dependency: RootDependency = RootDependency(
             authWebRepository: authWebRepository,
             rootEventTracker: tracker,
             sharedData: sharedData,
-            userWebRepository: userWebRepository
+            userWebRepository: userWebRepository,
+            trainingWebRepository: trainingWebRepository
         )
         coordinator = RootCoordinator(dependency: dependency)
     }

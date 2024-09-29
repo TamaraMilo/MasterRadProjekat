@@ -22,7 +22,11 @@ final class TrainingListCoordinator<Dependency> where Dependency: TrainingListIn
     
     var view: AnyView {
         AnyView(
-            TrainingListView()
+            TrainingListView(
+                viewModel: TrainingListViewModel(
+                    trainingWebRepository: dependency.trainingWebRepository
+                )
+            )
         )
     }
 }

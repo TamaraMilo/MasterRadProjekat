@@ -73,7 +73,8 @@ extension RootCoordinator: RootCoordinable {
         let dependency = VendorDependency(
             sharedData: VendorSharedData(),
             rootEventTracker: dependency.rootEventTracker,
-            authWebRepository: dependency.authWebRepository
+            authWebRepository: dependency.authWebRepository,
+            trainingWebRepository: dependency.trainingWebRepository
         )
         return VendorCoordinator(dependency: dependency)
     }
