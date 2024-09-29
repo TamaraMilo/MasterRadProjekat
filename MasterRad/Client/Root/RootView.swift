@@ -13,6 +13,7 @@ struct RootView: View {
     let loginCoordinator: any LoginCoordinable
     let registerCoordinator: any RegisterCoordinable
     let applicationCoordinator: any ApplicationCoordinable
+    let vendorCoordinator: any VendorCoordinable
     
     var body: some View {
         switch viewModel.state {
@@ -24,6 +25,8 @@ struct RootView: View {
             registerCoordinator.view
         case .application:
             applicationCoordinator.view
+        case .vendor:
+            vendorCoordinator.view
         }
     }
 }
@@ -53,6 +56,7 @@ struct RootView: View {
                 userWebRepository: UserWebRepository(),
                 authWebRepository: AuthWebRepository()
             )
-        )
+        ),
+        vendorCoordinator: VendorCoordinator(dependency: VendorDependency(sharedData: VendorSharedData()))
     )
 }

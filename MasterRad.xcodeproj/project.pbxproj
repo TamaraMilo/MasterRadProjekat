@@ -18,6 +18,7 @@
 		415D77D22CA354DE009CDBFE /* Training.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415D77D12CA354DE009CDBFE /* Training.swift */; };
 		415D77D42CA35529009CDBFE /* Trainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415D77D32CA35529009CDBFE /* Trainer.swift */; };
 		415D78832CA362D1009CDBFE /* UserWebRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415D78822CA362D1009CDBFE /* UserWebRepository.swift */; };
+		418015F92CA852C9001A1A6C /* VendorSharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418015F82CA852C9001A1A6C /* VendorSharedData.swift */; };
 		419E32422CA213D600F26BEA /* MasterRadApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419E32412CA213D600F26BEA /* MasterRadApp.swift */; };
 		419E32462CA213D800F26BEA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 419E32452CA213D800F26BEA /* Assets.xcassets */; };
 		419E32492CA213D800F26BEA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 419E32482CA213D800F26BEA /* Preview Assets.xcassets */; };
@@ -33,6 +34,7 @@
 		415D77D12CA354DE009CDBFE /* Training.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Training.swift; sourceTree = "<group>"; };
 		415D77D32CA35529009CDBFE /* Trainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trainer.swift; sourceTree = "<group>"; };
 		415D78822CA362D1009CDBFE /* UserWebRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserWebRepository.swift; sourceTree = "<group>"; };
+		418015F82CA852C9001A1A6C /* VendorSharedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorSharedData.swift; sourceTree = "<group>"; };
 		419E323E2CA213D600F26BEA /* MasterRad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MasterRad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		419E32412CA213D600F26BEA /* MasterRadApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterRadApp.swift; sourceTree = "<group>"; };
 		419E32452CA213D800F26BEA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -78,10 +80,29 @@
 			);
 			target = 419E323D2CA213D600F26BEA /* MasterRad */;
 		};
+		418015DE2CA846EB001A1A6C /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Create Training/CreateTrainingCoordinator.swift",
+				"Create Training/CreateTrainingDependency.swift",
+				"Create Training/CreateTrainingView.swift",
+				"Create Training/CreateTrainingViewModel.swift",
+				TrainingList/TrainingListCoordinator.swift,
+				TrainingList/TrainingListDependency.swift,
+				TrainingList/TrainingListView.swift,
+				TrainingList/TrainingListViewModel.swift,
+				VendorLandingPage/VendorCoordinator.swift,
+				VendorLandingPage/VendorDependency.swift,
+				VendorLandingPage/VendorView.swift,
+				VendorLandingPage/VendorViewModel.swift,
+			);
+			target = 419E323D2CA213D600F26BEA /* MasterRad */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		248F71062CA31337009011F2 /* Modules */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (248F71112CA3133D009011F2 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Modules; sourceTree = "<group>"; };
+		248F71062CA31337009011F2 /* Client */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (248F71112CA3133D009011F2 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Client; sourceTree = "<group>"; };
+		418015D72CA84624001A1A6C /* Vendor */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (418015DE2CA846EB001A1A6C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Vendor; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,7 +159,8 @@
 			children = (
 				248F714D2CA34FB9009011F2 /* AppDelegate.swift */,
 				248F71262CA3136E009011F2 /* Repository */,
-				248F71062CA31337009011F2 /* Modules */,
+				248F71062CA31337009011F2 /* Client */,
+				418015D72CA84624001A1A6C /* Vendor */,
 				419E326F2CA220F200F26BEA /* Shared */,
 				419E32412CA213D600F26BEA /* MasterRadApp.swift */,
 				419E32452CA213D800F26BEA /* Assets.xcassets */,
@@ -164,6 +186,7 @@
 				419E32742CA225BA00F26BEA /* UserData.swift */,
 				415D77D12CA354DE009CDBFE /* Training.swift */,
 				415D77D32CA35529009CDBFE /* Trainer.swift */,
+				418015F82CA852C9001A1A6C /* VendorSharedData.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -249,6 +272,7 @@
 				415D78832CA362D1009CDBFE /* UserWebRepository.swift in Sources */,
 				415D77D22CA354DE009CDBFE /* Training.swift in Sources */,
 				419E32422CA213D600F26BEA /* MasterRadApp.swift in Sources */,
+				418015F92CA852C9001A1A6C /* VendorSharedData.swift in Sources */,
 				419E32712CA2210B00F26BEA /* SharedData.swift in Sources */,
 				248F71282CA313C2009011F2 /* AuthWebRepository.swift in Sources */,
 			);

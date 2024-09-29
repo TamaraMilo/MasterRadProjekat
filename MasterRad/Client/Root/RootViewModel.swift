@@ -11,7 +11,7 @@ import Combine
 
 final class RootViewModel: ObservableObject {
     
-    @Published var state: State = .idle
+    @Published var state: State = .vendor
     
     private var rootEventTracker: RootEventTracker
     private var cancelSet: Set<AnyCancellable> = []
@@ -24,6 +24,7 @@ final class RootViewModel: ObservableObject {
         case login
         case application
         case register
+        case vendor
     }
     
     init(authWebRepository: AuthRepository, rootEventTracker: RootEventTracker) {
