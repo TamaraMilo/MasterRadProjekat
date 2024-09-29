@@ -15,6 +15,7 @@
 		248F71032CA312A6009011F2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 248F71022CA312A6009011F2 /* GoogleService-Info.plist */; };
 		248F71282CA313C2009011F2 /* AuthWebRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248F71272CA313C2009011F2 /* AuthWebRepository.swift */; };
 		248F714E2CA34FB9009011F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248F714D2CA34FB9009011F2 /* AppDelegate.swift */; };
+		24E2D2332CA9E09600994708 /* TrainingWebRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E2D2322CA9E08800994708 /* TrainingWebRepository.swift */; };
 		415D77D22CA354DE009CDBFE /* Training.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415D77D12CA354DE009CDBFE /* Training.swift */; };
 		415D77D42CA35529009CDBFE /* Trainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415D77D32CA35529009CDBFE /* Trainer.swift */; };
 		415D78832CA362D1009CDBFE /* UserWebRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415D78822CA362D1009CDBFE /* UserWebRepository.swift */; };
@@ -31,6 +32,7 @@
 		248F71022CA312A6009011F2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		248F71272CA313C2009011F2 /* AuthWebRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthWebRepository.swift; sourceTree = "<group>"; };
 		248F714D2CA34FB9009011F2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		24E2D2322CA9E08800994708 /* TrainingWebRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingWebRepository.swift; sourceTree = "<group>"; };
 		415D77D12CA354DE009CDBFE /* Training.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Training.swift; sourceTree = "<group>"; };
 		415D77D32CA35529009CDBFE /* Trainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trainer.swift; sourceTree = "<group>"; };
 		415D78822CA362D1009CDBFE /* UserWebRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserWebRepository.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 		248F71262CA3136E009011F2 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				24E2D2322CA9E08800994708 /* TrainingWebRepository.swift */,
 				248F71272CA313C2009011F2 /* AuthWebRepository.swift */,
 				415D78822CA362D1009CDBFE /* UserWebRepository.swift */,
 			);
@@ -266,6 +269,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				419E32632CA2180300F26BEA /* Coordinable.swift in Sources */,
+				24E2D2332CA9E09600994708 /* TrainingWebRepository.swift in Sources */,
 				419E32752CA225BA00F26BEA /* UserData.swift in Sources */,
 				248F714E2CA34FB9009011F2 /* AppDelegate.swift in Sources */,
 				415D77D42CA35529009CDBFE /* Trainer.swift in Sources */,

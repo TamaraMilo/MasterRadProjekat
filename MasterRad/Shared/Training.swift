@@ -6,7 +6,7 @@
 //
 
 import Foundation
-struct Training: Identifiable, Hashable {
+struct Training: Identifiable, Hashable, Decodable {
     let id: Int
     var name: String
     var date: String
