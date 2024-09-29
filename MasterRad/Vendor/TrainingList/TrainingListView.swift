@@ -41,11 +41,40 @@ struct TrainingListView: View {
     }
     
     var trainingListView: some View {
-        ForEach(viewModel.trainings) { training in
-            Text(training.name)
-                .font(.caption)
-            
+        ScrollView {
+            ForEach(viewModel.trainings) { training in
+                HStack {
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text("Name \(training.name)")
+                            .font(.title3)
+                        Text("Time \(training.time)")
+                        Text("Date \(training.date)")
+                        Text("Description \(training.description)")
+                        Text("Trainer Name \(training.trainer.fistName)")
+                        makeParticipantsView(participants: training.participants)
+                    }
+                    .padding()
+                    Spacer()
+                }
+                .background(fieldBackgroundView)
+                .padding(.horizontal, 15)
+                .font(.caption2)
+            }
         }
+    }
+        
+        func makeParticipantsView(participants: [UserData]) -> some View {
+            VStack(alignment: .leading) {
+                Text("Participants:")
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack {
+                    ForEach(participants) { participant in
+                        
+                        Text(participant.firstName + " " + participant.lastName)
+                        }
+                    }
+                }
+            }
     }
     
     var fieldBackgroundView: some View {
