@@ -99,15 +99,15 @@ extension ApplicationView {
 extension ApplicationView {
     var trainingDescriptionView: some View {
         TabView(selection: $viewModel.currentTab) {
-            ForEach(viewModel.days, id: \.self) { day in
+            ForEach(viewModel.days) { day in
                 VStack(spacing: 30) {
-                    Text(day)
+                    Text(day.name)
                         .foregroundStyle(.white)
                         .font(.title)
                         .padding(.vertical, 20)
-//                    makeTrainingDescription(trainings: day.trainings)
+                    makeTrainingDescription(trainings: viewModel.trainings.filter({ $0.date == day.date}))
                 }
-//                .tag(day.id)
+                .tag(day.id)
             }
         }
         .id(viewModel.currentTab)

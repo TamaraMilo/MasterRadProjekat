@@ -14,8 +14,7 @@ final class ApplicationViewModel: ObservableObject {
     private var disposables = Set<AnyCancellable>()
     
     @Published var currentTab: Int = 0
-//    @Published var days: [Day] = Day.fixtureWeek()
-    @Published var days: [String] = []
+    @Published var days: [Day] = []
     @Published var trainings: [Training] = []
     
     init(
@@ -38,18 +37,45 @@ final class ApplicationViewModel: ObservableObject {
             }, receiveValue: {[weak self] trainings in
                 print(trainings)
                 self?.trainings = trainings
-                for training in trainings {
-                    self?.days.append(training.date)
-                }
                 
+                for training in trainings {
+                    let day = self?.mapDay(training: training)
+                    self?.days.append(day!)
+                }
             })
             .store(in: &disposables)
     }
+    
+    func mapDay(training: Training) -> Day {
+        let convertedDate = String.toDate(from: training.date)
+        let dateName = convertedDate?.description(with: .current).components(separatedBy: ",").first
+
+        let day = Day(
+            id: Int.random(in: 0...1000),
+            name: dateName ?? training.date,
+            date: training.date,
+            trainings: []
+        )
+        
+        return day
+    }
  }
+
+extension String {
+    static func toDate(from stringDate: String) -> Date? {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MM.yyyy."
+        return formatter.date(from: stringDate)
+    }
+}
+
+
+
 
 struct Day: Identifiable {
     let id: Int
     var name: String
+    var date: String = ""
     var trainings: [Training]
 }
 
@@ -77,6 +103,7 @@ extension Day {
         Day(
             id: 1,
             name: "Ponedeljak",
+            date: "29.09.2024.",
             trainings: fixtureTrainingsForDay()
         )
     }
@@ -84,6 +111,7 @@ extension Day {
         Day(
             id: 2 ,
             name: "Utorak",
+            date: "30.09.2024.",
             trainings: fixtureTrainingsForDay()
         )
     }
@@ -142,7 +170,7 @@ extension Training {
         Training(
            id: "1",
            name: "CrossFit",
-           date: "31.01.2025",
+           date: "29.09.2024",
            time: "09:00",
            trainer: "Petar Petrovic",
            description: "1000 i 10000 sklekova",
@@ -154,7 +182,7 @@ extension Training {
         Training(
            id: "2",
            name: "FitCom",
-           date: "31.01.2025",
+           date: "30.09.2024",
            time: "10:00",
            trainer: "Petar Petrovic",
            description: "1000 i 10000 sklekova",
