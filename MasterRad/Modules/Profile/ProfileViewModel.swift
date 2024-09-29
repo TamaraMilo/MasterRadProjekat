@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 final class ProfileViewModel: ObservableObject {
     private var rootEventTracker: RootEventTracker
@@ -18,6 +19,7 @@ final class ProfileViewModel: ObservableObject {
     @Published var newPassword: String = ""
     @Published var repeatNewPassword: String = ""
     @Published var editMode: Bool = false
+    @Published var disposables = Set<AnyCancellable>()
     
     init(userWebRepository: UserRepository, authWebRepository: AuthRepository,rootEventTracker: RootEventTracker) {
         self.rootEventTracker = rootEventTracker
@@ -43,6 +45,26 @@ final class ProfileViewModel: ObservableObject {
             oldUserData = data
             state = .ready
         }
+    }
+    
+    func fetchUserData() {
+        guard let user = authWebRepository.user else { return }
+        state = .loading
+        userWebRepository.getUserData(id: user.uid)
+            .sink(receiveCompletion: { [weak self] result in
+                switch result {
+                case .finished: break
+                case .failure(let failure):
+                    print(failure.localizedDescription)
+                }
+                
+            }, receiveValue: {[weak self] data in
+                guard let self, let data else { return }
+                self.user = data
+                oldUserData = data
+                state = .ready
+            })
+            .store(in: &disposables)
     }
     
     func updateUserData() {

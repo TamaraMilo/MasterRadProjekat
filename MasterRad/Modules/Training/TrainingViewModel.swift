@@ -59,6 +59,26 @@ final class TreningViewModel: ObservableObject {
         }
     }
     
+    func fetchUserData() {
+        guard let user = authWebRepository.user else { return }
+        state = .loading
+        userWebRepository.getUserData(id: user.uid)
+            .sink(receiveCompletion: { [weak self] result in
+                switch result {
+                case .finished: break
+                case .failure(let failure):
+                    print(failure.localizedDescription)
+                }
+                
+            }, receiveValue: {[weak self] data in
+                guard let self, let data else { return }
+                self.user = data
+                oldUserData = data
+                state = .ready
+            })
+            .store(in: &disposables)
+    }
+    
 }
 
 extension TreningViewModel {

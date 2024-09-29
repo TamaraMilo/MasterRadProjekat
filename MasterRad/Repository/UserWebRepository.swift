@@ -7,10 +7,13 @@
 
 import Foundation
 import FirebaseDatabase
+import Combine
+import SwiftUI
 
 protocol UserRepository {
     var ref: DatabaseReference { get }
     func getUserData(id: String) async -> UserData?
+    func getUserData(id: String) -> AnyPublisher<UserData?, Error>
     func createUser(id: String, name: String, surname: String, age: String)
     func updateUserData(userData: UserData)
 }
@@ -54,5 +57,22 @@ class UserWebRepository: UserRepository {
         ]
         ref.child("users").child(userData.id)
             .setValue(updatedValues)
+    }
+    
+    func getUserData(id: String) -> AnyPublisher<UserData?, Error> {
+        let subject = CurrentValueSubject<UserData?, Error>(UserData())
+
+        let handle = ref.child("users").child(id).observe(.value, with: { snapshot in
+            let json = snapshot.value as! [String: Any]
+            
+            let userData = try? JSONDecoder().decode(UserData.self, from: JSONSerialization.data(withJSONObject: json))
+            subject.send(userData)
+
+        })
+        
+        return subject.handleEvents(receiveCancel: {[weak self] in
+                    self?.ref.removeObserver(withHandle: handle)
+        }).eraseToAnyPublisher()
+        
     }
 }

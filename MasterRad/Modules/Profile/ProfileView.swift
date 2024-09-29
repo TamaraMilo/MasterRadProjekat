@@ -21,9 +21,7 @@ struct ProfileView: View {
     var rootView: some View {
         switch viewModel.state {
         case .idle:
-            Color.clear.task {
-                await viewModel.fetchUserData()
-            }
+            Color.clear.onAppear(perform: viewModel.fetchUserData)
         case .loading:
             ProgressView()
         case .ready:
