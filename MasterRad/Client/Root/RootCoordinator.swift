@@ -55,7 +55,8 @@ extension RootCoordinator: RootCoordinable {
         let dependency = ApplicationDependency(
             rootEventTracker: dependency.rootEventTracker,
             userWebRepository: dependency.userWebRepository,
-            authWebRepository: dependency.authWebRepository
+            authWebRepository: dependency.authWebRepository,
+            trainingWebRepository: TrainingWebRepository()
         )
         return ApplicationCoordinator(dependency: dependency)
     }
