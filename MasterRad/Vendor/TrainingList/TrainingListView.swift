@@ -45,8 +45,16 @@ struct TrainingListView: View {
             ForEach(viewModel.trainings) { training in
                 HStack {
                     VStack(alignment: .leading, spacing: 10) {
-                        Text("Name \(training.name)")
-                            .font(.title3)
+                        HStack {
+                            Text("Name \(training.name)")
+                                .font(.title3)
+                            Spacer()
+                            Button {
+                                
+                            } label: {
+                                Text("Delete")
+                            }
+                    }
                         Text("Time \(training.time)")
                         Text("Date \(training.date)")
                         Text("Description \(training.description)")
