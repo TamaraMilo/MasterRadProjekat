@@ -24,7 +24,10 @@ class ApplicationCoordinator<Dependency> where Dependency: ApplicationDependency
     var view: AnyView {
         AnyView(
             ApplicationView(
-                viewModel: ApplicationViewModel(rootEventTracker: dependency.rootEventTracker),
+                viewModel: ApplicationViewModel(
+                    rootEventTracker: dependency.rootEventTracker,
+                    trainingWebRepository: dependency.trainingWebRepository
+                ),
                 coordinator: self
             )
 //            .environmentObject(dependency.sharedData)

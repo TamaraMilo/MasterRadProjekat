@@ -70,7 +70,7 @@ class TrainingWebRepository: TrainingRepository {
                     let participantsDataedw = trainingData as! NSDictionary
                     let participantsData = participantsDataedw["participants"]
                     let participantsJson = try JSONSerialization.data(withJSONObject: participantsData)
-                    let participants = try JSONDecoder().decode([UserData].self, from: trainingJson)
+                    let participants = try JSONDecoder().decode([UserData].self, from: participantsJson)
                     
                     var traingno = Training()
                     traingno.id = trainingW.id
@@ -88,11 +88,9 @@ class TrainingWebRepository: TrainingRepository {
                     print("Error")
                 }
             }
-            
-            
+            subject.send(trainings)
         })
         
-        subject.send(trainings)
         return subject.handleEvents(receiveCancel: {[weak self] in
                     self?.ref.removeObserver(withHandle: handle)
         }).eraseToAnyPublisher()

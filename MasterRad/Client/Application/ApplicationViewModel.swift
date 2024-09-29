@@ -6,17 +6,46 @@
 //
 
 import Foundation
+import Combine
 
 final class ApplicationViewModel: ObservableObject {
     let rootEventTracker: RootEventTracker
-    @Published var currentTab: Int = 0
-    @Published var days: [Day] = Day.fixtureWeek()
+    private var trainingWebRepository: TrainingRepository
+    private var disposables = Set<AnyCancellable>()
     
-    init(rootEventTracker: RootEventTracker) {
+    @Published var currentTab: Int = 0
+//    @Published var days: [Day] = Day.fixtureWeek()
+    @Published var days: [String] = []
+    @Published var trainings: [Training] = []
+    
+    init(
+        rootEventTracker: RootEventTracker,
+        trainingWebRepository: TrainingRepository
+    ) {
         self.rootEventTracker = rootEventTracker
+        self.trainingWebRepository = trainingWebRepository
+        fetchTrainings()
     }
     
-}
+    func fetchTrainings() {
+        trainingWebRepository.getTrainings()
+            .sink(receiveCompletion: { [weak self] result in
+                switch result {
+                case .finished: break
+                case .failure(let failure):
+                    print(failure.localizedDescription)
+                }
+            }, receiveValue: {[weak self] trainings in
+                print(trainings)
+                self?.trainings = trainings
+                for training in trainings {
+                    self?.days.append(training.date)
+                }
+                
+            })
+            .store(in: &disposables)
+    }
+ }
 
 struct Day: Identifiable {
     let id: Int

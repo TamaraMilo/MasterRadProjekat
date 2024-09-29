@@ -99,15 +99,15 @@ extension ApplicationView {
 extension ApplicationView {
     var trainingDescriptionView: some View {
         TabView(selection: $viewModel.currentTab) {
-            ForEach(viewModel.days) { day in
+            ForEach(viewModel.days, id: \.self) { day in
                 VStack(spacing: 30) {
-                    Text(day.name)
+                    Text(day)
                         .foregroundStyle(.white)
                         .font(.title)
                         .padding(.vertical, 20)
-                    makeTrainingDescription(trainings: day.trainings)
+//                    makeTrainingDescription(trainings: day.trainings)
                 }
-                .tag(day.id)
+//                .tag(day.id)
             }
         }
         .id(viewModel.currentTab)
@@ -148,12 +148,16 @@ extension ApplicationView {
 
 #Preview {
     ApplicationView(
-        viewModel: ApplicationViewModel(rootEventTracker: RootEventTracker()),
+        viewModel: ApplicationViewModel(
+            rootEventTracker: RootEventTracker(),
+            trainingWebRepository: TrainingWebRepository()
+        ),
         coordinator: ApplicationCoordinator(
             dependency: ApplicationDependency(
                 rootEventTracker: RootEventTracker(),
                 userWebRepository: UserWebRepository(),
-                authWebRepository: AuthWebRepository()
+                authWebRepository: AuthWebRepository(),
+                trainingWebRepository: TrainingWebRepository()
             )
         )
     )
