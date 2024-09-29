@@ -7,6 +7,11 @@
 
 import Foundation
 
-final class TrainingListViewModel {
-    
+final class TrainingListViewModel: ObservableObject {
+ 
+    @Published var trainings: [Training] = [
+        Training.fixtureTraining1(),
+        Training.fixtureTraining2(),
+        Training.fixtureTraining3()
+    ]
 }
