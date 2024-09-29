@@ -29,6 +29,7 @@ final class TrainingListViewModel: ObservableObject {
     }
     
     func fetchTrainings() {
+        state = .loading
         trainingWebRepository.getTrainings()
             .sink(receiveCompletion: { result in
                 switch result {
@@ -39,6 +40,7 @@ final class TrainingListViewModel: ObservableObject {
             }, receiveValue: { [weak self] data in
                 guard let self else { return }
                 trainings = data
+                state = .ready
             })
             .store(in: &disposables)
     }

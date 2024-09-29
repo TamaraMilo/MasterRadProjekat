@@ -12,33 +12,33 @@ import Combine
 final class TreningViewModel: ObservableObject {
     
     @Published var state: State = .idle
-    @Binding var training: Training
-    @Published var training2: Training
+    @Published var training: Training = Training()
+    var trainingId: String
+    //@Published var training2: Training
     @Published var isAlreadyInTraining:Bool = false
     
     private var disposables = Set<AnyCancellable>()
     private var userWebRepository: UserRepository
     private var authWebRepository: AuthRepository
+    private var trainingWebRepository = TrainingWebRepository()
     
     var user: UserData = UserData()
     
     init(
         userWebRepository: UserRepository,
         authWebRepository: AuthRepository,
-        training: Binding<Training>
+        trainingId: String
     ) {
         self.userWebRepository = userWebRepository
         self.authWebRepository = authWebRepository
-        self._training = training
-        self.training2 = training.wrappedValue
+        self.trainingId = trainingId
     }
     
     func addUserToTrain() {
-        if training2.participants.contains(where: { $0.id == user.id}) {
+        if training.participants.contains(where: { $0.id == user.id}) {
             print("Already signed")
             isAlreadyInTraining = true
         } else {
-            training2.participants.append(user)
             isAlreadyInTraining = true
             training.participants.append(user)
         }
@@ -46,40 +46,32 @@ final class TreningViewModel: ObservableObject {
     }
     
     func removeUserFromTraining() {
-        training2.participants.removeAll(where: { $0.id == user.id })
+        training.participants.removeAll(where: { $0.id == user.id })
         isAlreadyInTraining = false
     }
     
-    @MainActor
-    func fetchUserData() async {
-        guard let user = authWebRepository.user else { return }
-        state = .loading
-        let data =  await userWebRepository.getUserData(id: user.uid)
-        if let data  {
-            self.user = data
-            state = .ready
-        }
-    }
     
-    func fetchUserData() {
+    func fetchData() {
         guard let user = authWebRepository.user else { return }
+        let trainingPublisher =  trainingWebRepository.getTraining(id: trainingId)
+        let userPublisher = userWebRepository.getUserData(id: user.uid)
         state = .loading
-        userWebRepository.getUserData(id: user.uid)
-            .sink(receiveCompletion: { [weak self] result in
+        Publishers.Zip(trainingPublisher, userPublisher)
+            .sink(receiveCompletion: {result in
                 switch result {
                 case .finished: break
                 case .failure(let failure):
                     print(failure.localizedDescription)
                 }
                 
-            }, receiveValue: {[weak self] data in
-                guard let self, let data else { return }
-                self.user = data
+            }, receiveValue:{[weak self] training, user in
+                guard let self, let user, let training else { return }
+                self.training = training
+                self.user = user
                 state = .ready
             })
             .store(in: &disposables)
     }
-    
 }
 
 extension TreningViewModel {

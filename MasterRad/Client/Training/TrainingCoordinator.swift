@@ -25,7 +25,7 @@ class TrainingCoordinator<Dependency> where Dependency: TrainingDependency {
                 viewModel: TreningViewModel(
                     userWebRepository: dependency.userWebRepository,
                     authWebRepository: dependency.authWebRepository,
-                    training: $training
+                    trainingId: ""
                 )
             )
         )

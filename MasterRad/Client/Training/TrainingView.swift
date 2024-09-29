@@ -27,7 +27,7 @@ struct TrainingView: View {
     var rootView: some View {
         switch viewModel.state {
         case .idle:
-            Color.clear.onAppear(perform: viewModel.fetchUserData)
+            Color.clear.onAppear(perform: viewModel.fetchData)
         case .loading:
             ProgressView()
         case .ready:
@@ -155,7 +155,7 @@ struct TrainingView: View {
                 .font(.title2)
             Divider()
             ScrollView {
-                ForEach(viewModel.training2.participants) { user in
+                ForEach(viewModel.training.participants) { user in
                     HStack {
                         Text(user.firstName)
                             .font(.headline)

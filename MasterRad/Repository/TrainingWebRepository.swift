@@ -66,24 +66,9 @@ class TrainingWebRepository: TrainingRepository {
                 do {
                     let trainingData = data[key]
                     let trainingJson = try JSONSerialization.data(withJSONObject: trainingData)
-                    let trainingW = try JSONDecoder().decode(TrainingW.self, from: trainingJson)
-                    let participantsDataedw = trainingData as! NSDictionary
-                    let participantsData = participantsDataedw["participants"]
-                    let participantsJson = try JSONSerialization.data(withJSONObject: participantsData)
-                    let participants = try JSONDecoder().decode([UserData].self, from: participantsJson)
+                    let training = try JSONDecoder().decode(Training.self, from: trainingJson)
                     
-                    var traingno = Training()
-                    traingno.id = trainingW.id
-                    traingno.name = trainingW.name
-                    traingno.date = trainingW.date
-                    traingno.time = trainingW.time
-                    traingno.description = trainingW.description
-                    traingno.trainer = trainingW.trainer
-                    traingno.participants = participants
-                    
-
-                    
-                    trainings.append(traingno)
+                    trainings.append(training)
                 } catch {
                     print("Error")
                 }
@@ -98,6 +83,15 @@ class TrainingWebRepository: TrainingRepository {
     
     func removeTraining(id: String) {
         ref.child("trainings").child(id).removeValue()
+    }
+    
+    func addParticipant(trainingId: String, user: UserData) {
+        let participantsRef = ref.child("trainings").child(trainingId).child("participants")
+        participantsRef.observe(.value, with: { snapshot in
+            var array = snapshot.value as? [UserData] ?? []
+            array.append(user)
+            participantsRef.setValue(array)
+        })
     }
     
     
