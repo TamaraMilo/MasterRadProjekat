@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Combine
 
 final class TreningViewModel: ObservableObject {
     
@@ -15,6 +16,7 @@ final class TreningViewModel: ObservableObject {
     @Published var training2: Training
     @Published var isAlreadyInTraining:Bool = false
     
+    private var disposables = Set<AnyCancellable>()
     private var userWebRepository: UserRepository
     private var authWebRepository: AuthRepository
     
@@ -73,7 +75,6 @@ final class TreningViewModel: ObservableObject {
             }, receiveValue: {[weak self] data in
                 guard let self, let data else { return }
                 self.user = data
-                oldUserData = data
                 state = .ready
             })
             .store(in: &disposables)

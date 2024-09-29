@@ -26,7 +26,6 @@ class SharedData: ObservableObject {
     
     enum NavigationStates: Hashable {
         case training
-        case trainer
         case profile
     }
     

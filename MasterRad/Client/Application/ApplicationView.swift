@@ -14,7 +14,6 @@ struct ApplicationView: View {
     
     @State private var startAnimation: Bool = false
     @State var training: Training = Training()
-    @State var trainer: Trainer?
     
     var body: some View {
         NavigationStack(path: $sharedData.navigationPath) {
@@ -23,8 +22,6 @@ struct ApplicationView: View {
                     switch state {
                     case .profile:
                         profileView
-                    case .trainer:
-                        trainerView
                     case .training:
                         trainingView
                     }
@@ -47,13 +44,6 @@ struct ApplicationView: View {
     
     var profileView: some View {
         coordinator.profileCoordinator.view
-    }
-    
-    @ViewBuilder
-    var trainerView: some View {
-        if let trainer {
-            coordinator.makeTrainerCoordinator(trainer: trainer).view
-        }
     }
     
     @ViewBuilder
@@ -130,7 +120,7 @@ extension ApplicationView {
                 VStack {
                     Text("Naziv: \(training.name)")
                     Text("Vreme: \(training.time)")
-                    Text("Trener: \(training.trainer.fistName)")
+                    Text("Trener: \(training.trainer)")
                 }
                 .frame(
                     width: UIScreen.main.bounds.width * 0.9,
@@ -146,7 +136,6 @@ extension ApplicationView {
                 )
                 .onTapGesture {
                     self.training = training
-                    self.trainer = training.trainer
                     sharedData.navigate(destination: .training)
                 }
             }

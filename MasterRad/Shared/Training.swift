@@ -7,11 +7,11 @@
 
 import Foundation
 struct Training: Identifiable, Hashable, Decodable {
-    let id: Int
+    let id: String
     var name: String
     var date: String
     var time: String
-    var trainer: Trainer
+    var trainer: String
     var description: String
     var participants: [UserData]
     
@@ -23,7 +23,7 @@ struct Training: Identifiable, Hashable, Decodable {
         hasher.combine(id)
     }
     
-    init(id: Int, name: String, date: String, time: String, trainer: Trainer, description: String, participants: [UserData]) {
+    init(id: String, name: String, date: String, time: String, trainer: String, description: String, participants: [UserData]) {
         self.id = id
         self.name = name
         self.date = date
@@ -34,17 +34,11 @@ struct Training: Identifiable, Hashable, Decodable {
     }
     
     init() {
-        id = 0
+        id = ""
         name = ""
         date = ""
         time = ""
-        trainer = Trainer(
-            id: 0,
-            fistName: "",
-            lastName: "",
-            trainings: [],
-            biography: ""
-        )
+        trainer = ""
         description = ""
         participants = []
     }

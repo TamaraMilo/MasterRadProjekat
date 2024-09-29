@@ -11,12 +11,13 @@ import Combine
 
 final class RootViewModel: ObservableObject {
     
-    @Published var state: State = .vendor
+    @Published var state: State = .idle
     
     private var rootEventTracker: RootEventTracker
     private var cancelSet: Set<AnyCancellable> = []
     private let defaults: UserDefaults = UserDefaults.standard
     private let authWebRepository: AuthRepository
+    private let userWebRepository: UserRepository
     
     
     enum State {
@@ -27,9 +28,10 @@ final class RootViewModel: ObservableObject {
         case vendor
     }
     
-    init(authWebRepository: AuthRepository, rootEventTracker: RootEventTracker) {
+    init(authWebRepository: AuthRepository,userWebRepository: UserRepository, rootEventTracker: RootEventTracker) {
         self.rootEventTracker = rootEventTracker
         self.authWebRepository = authWebRepository
+        self.userWebRepository = userWebRepository
         self.listenForOpenApplication()
         self.listenForOpenLogin()
         self.listenForOpenRegister()
@@ -73,6 +75,22 @@ extension RootViewModel {
     }
     
     func checkAuthentication() {
-        state = !authWebRepository.isUserLoggedIn ? .login : .application
+        if authWebRepository.isUserLoggedIn, let userId = authWebRepository.user?.uid {
+            userWebRepository.getUserData(id: userId)
+                .sink(receiveCompletion: {result in
+                    switch result {
+                    case .finished: break
+                    case .failure(let failure):
+                        print(failure.localizedDescription)
+                    }
+                    
+                }, receiveValue: {[weak self] data in
+                    guard let self, let data else { return }
+                    state = data.role == "client" ? .application : .vendor
+                })
+                .store(in: &cancelSet)
+        } else {
+            state = .login
+        }
     }
 }

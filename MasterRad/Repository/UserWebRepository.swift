@@ -43,7 +43,8 @@ class UserWebRepository: UserRepository {
                     "id": id,
                     "firstName": name,
                     "lastName": surname,
-                    "age": age
+                    "age": age,
+                    "role": "client"
                 ]
             )
     }
@@ -53,7 +54,8 @@ class UserWebRepository: UserRepository {
             "id": userData.id,
             "firstName": userData.firstName,
             "lastName": userData.lastName,
-            "age": userData.age
+            "age": userData.age,
+            "role": "client"
         ]
         ref.child("users").child(userData.id)
             .setValue(updatedValues)

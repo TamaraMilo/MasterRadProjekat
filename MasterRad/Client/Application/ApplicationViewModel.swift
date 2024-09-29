@@ -111,17 +111,11 @@ extension Day {
 extension Training {
     static func fixtureTraining1() -> Training {
         Training(
-           id: 1,
+           id: "1",
            name: "CrossFit",
            date: "31.01.2025",
            time: "09:00",
-           trainer: Trainer(
-               id: 1,
-               fistName: "Petar",
-               lastName: "Petrovic",
-               trainings: [],
-               biography: "Capcarap"
-           ),
+           trainer: "Petar Petrovic",
            description: "1000 i 10000 sklekova",
            participants: UserData.fixtureParticipants()
            )
@@ -129,17 +123,11 @@ extension Training {
     
     static func fixtureTraining2() -> Training {
         Training(
-           id: 2,
+           id: "2",
            name: "FitCom",
            date: "31.01.2025",
            time: "10:00",
-           trainer: Trainer(
-               id: 2,
-               fistName: "Janko",
-               lastName: "Nikolic",
-               trainings: [],
-               biography: "Capcarap"
-           ),
+           trainer: "Petar Petrovic",
            description: "1000 i 10000 sklekova",
            participants: UserData.fixtureParticipants()
            )
@@ -147,17 +135,11 @@ extension Training {
     
     static func fixtureTraining3() -> Training {
         Training(
-           id: 3,
+           id: "3",
            name: "Hiit",
            date: "31.01.2025",
            time: "11:00",
-           trainer: Trainer(
-               id: 3,
-               fistName: "Stanko",
-               lastName: "Jovanovic",
-               trainings: [],
-               biography: "Capcarap"
-           ),
+           trainer: "Petar Petrovic",
            description: "1000 i 10000 sklekova",
            participants: UserData.fixtureParticipants()
            )
@@ -165,17 +147,11 @@ extension Training {
     
     static func fixtureTraining4() -> Training {
         Training(
-           id: 4,
+           id: "4",
            name: "Olympic weightlift",
            date: "31.01.2025",
            time: "12:00",
-           trainer: Trainer(
-               id: 4,
-               fistName: "Marko",
-               lastName: "Stankovic",
-               trainings: [],
-               biography: "Capcarap"
-           ),
+           trainer: "Petar Petrovic",
            description: "1000 i 10000 sklekova",
            participants: UserData.fixtureParticipants()
            )
@@ -183,17 +159,11 @@ extension Training {
     
     static func fixtureTraining5() -> Training {
         Training(
-           id: 5,
+           id: "5",
            name: "CrossFit",
            date: "31.01.2025",
            time: "13:00",
-           trainer: Trainer(
-               id: 1,
-               fistName: "Petar",
-               lastName: "Petrovic",
-               trainings: [],
-               biography: "Capcarap"
-           ),
+           trainer: "Petar Petrovic",
            description: "1000 i 10000 sklekova",
            participants: UserData.fixtureParticipants()
            )
@@ -201,153 +171,99 @@ extension Training {
     
     static func fixtureTraining6() -> Training {
         Training(
-           id: 6,
+           id: "6",
            name: "FitCom",
            date: "31.01.2025",
            time: "14:00",
-           trainer: Trainer(
-               id: 4,
-               fistName: "Marko",
-               lastName: "Stankovic",
-               trainings: [],
-               biography: "Capcarap"
-           ),
+           trainer: "Petar Petrovic",
            description: "1000 i 10000 sklekova",
            participants: UserData.fixtureParticipants()
            )
     }
     static func fixtureTraining7() -> Training {
         Training(
-           id: 7,
+           id: "7",
            name: "Hiit",
            date: "31.01.2025",
            time: "15:00",
-           trainer: Trainer(
-               id: 3,
-               fistName: "Stanko",
-               lastName: "Jovanovic",
-               trainings: [],
-               biography: "Capcarap"
-           ),
+           trainer: "Petar Petrovic",
            description: "1000 i 10000 sklekova",
            participants: UserData.fixtureParticipants()
            )
     }
     static func fixtureTraining8() -> Training {
         Training(
-           id: 8,
+           id: "8",
            name: "CrossFit",
            date: "31.01.2025",
            time: "16:00",
-           trainer: Trainer(
-               id: 3,
-               fistName: "Janko",
-               lastName: "Nikolic",
-               trainings: [],
-               biography: "Capcarap"
-           ),
+           trainer: "Petar Petrovic",
            description: "1000 i 10000 sklekova",
            participants: UserData.fixtureParticipants()
            )
     }
     static func fixtureTraining9() -> Training {
         Training(
-           id: 9,
+           id: "9",
            name: "Olympic weightlift",
            date: "31.01.2025",
            time: "17:00",
-           trainer: Trainer(
-               id: 4,
-               fistName: "Marko",
-               lastName: "Stankovic",
-               trainings: [],
-               biography: "Capcarap"
-           ),
+           trainer: "Petar Petrovic",
            description: "1000 i 10000 sklekova",
            participants: UserData.fixtureParticipants()
            )
     }
     static func fixtureTraining10() -> Training {
         Training(
-           id: 10,
+           id: "10",
            name: "CrossFit",
            date: "31.01.2025",
            time: "18:00",
-           trainer: Trainer(
-               id: 1,
-               fistName: "Petar",
-               lastName: "Petrovic",
-               trainings: [],
-               biography: "Capcarap"
-           ),
+           trainer: "Petar Petrovic",
            description: "1000 i 10000 sklekova",
            participants: UserData.fixtureParticipants()
            )
     }
     static func fixtureTraining11() -> Training {
         Training(
-           id: 11,
+           id: "11",
            name: "Olympic weightlift",
            date: "31.01.2025",
            time: "19:00",
-           trainer: Trainer(
-               id: 2,
-               fistName: "Janko",
-               lastName: "Nikolic",
-               trainings: [],
-               biography: "Capcarap"
-           ),
+           trainer: "Petar Petrovic",
            description: "1000 i 10000 sklekova",
            participants: UserData.fixtureParticipants()
            )
     }
     static func fixtureTraining12() -> Training {
         Training(
-           id: 12,
+           id: "12",
            name: "FitCom",
            date: "31.01.2025",
            time: "20:00",
-           trainer: Trainer(
-               id: 3,
-               fistName: "Stanko",
-               lastName: "Jovanovic",
-               trainings: [],
-               biography: "Capcarap"
-           ),
+           trainer: "Petar Petrovic",
            description: "1000 i 10000 sklekova",
            participants: UserData.fixtureParticipants()
            )
     }
     static func fixtureTraining13() -> Training {
         Training(
-           id: 13,
+           id: "13",
            name: "Olympic weightlift",
            date: "31.01.2025",
            time: "21:00",
-           trainer: Trainer(
-               id: 3,
-               fistName: "Stanko",
-               lastName: "Jovanovic",
-               trainings: [],
-               biography: "Capcarap"
-           ),
+           trainer: "Petar Petrovic",
            description: "1000 i 10000 sklekova",
            participants: UserData.fixtureParticipants()
            )
     }
     static func fixtureTraining14() -> Training {
         Training(
-           id: 14,
+           id: "14",
            name: "Hiit",
            date: "31.01.2025",
            time: "22:00",
-           trainer: Trainer(
-               id: 4,
-               fistName: "Marko",
-               lastName: "Stankovic",
-               trainings: [],
-               biography: "Capcarap"
-           ),
+           trainer: "Petar Petrovic",
            description: "1000 i 10000 sklekova",
            participants: UserData.fixtureParticipants()
            )
@@ -367,25 +283,25 @@ extension UserData {
     }
     
     static func fixtureUser() -> UserData {
-        UserData(id: "0", firstName: "Jovana", lastName: "Petrovic", age: "43")
+        UserData(id: "0", firstName: "Jovana", lastName: "Petrovic", age: "43", role: "client")
     }
     
     static func fixtureUser1() -> UserData {
-        UserData(id: "1", firstName: "Katarina", lastName: "Aleksic", age: "27")
+        UserData(id: "1", firstName: "Katarina", lastName: "Aleksic", age: "27", role: "client")
     }
     static func fixtureUser2() -> UserData {
-        UserData(id: "2", firstName: "Nikola", lastName: "Jovanovic", age: "21")
+        UserData(id: "2", firstName: "Nikola", lastName: "Jovanovic", age: "21", role: "client")
     }
     
     static func fixtureUser3() -> UserData {
-        UserData(id: "3", firstName: "Marko", lastName: "Andjelkovic", age: "36")
+        UserData(id: "3", firstName: "Marko", lastName: "Andjelkovic", age: "36", role: "client")
     }
     
     static func fixtureUser4() -> UserData {
-        UserData(id: "4", firstName: "Nikola", lastName: "Nikolic", age: "34")
+        UserData(id: "4", firstName: "Nikola", lastName: "Nikolic", age: "34", role: "client")
     }
     
     static func fixtureUser5() -> UserData {
-        UserData(id: "5", firstName: "Aleksandar", lastName: "Jovanovic", age: "30")
+        UserData(id: "5", firstName: "Aleksandar", lastName: "Jovanovic", age: "30", role: "client")
     }
 }

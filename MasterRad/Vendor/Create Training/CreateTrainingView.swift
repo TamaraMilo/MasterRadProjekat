@@ -97,7 +97,7 @@ extension CreateTrainingView {
     var trainerView: some View {
         VStack(alignment: .leading) {
             Text("Trainer")
-            TextField("Trainer", text: $viewModel.training.trainer.fistName)
+            TextField("Trainer", text: $viewModel.training.trainer)
                 .padding()
                 .background(fieldBackgroundView)
         }

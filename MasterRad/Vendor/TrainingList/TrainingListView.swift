@@ -58,7 +58,7 @@ struct TrainingListView: View {
                         Text("Time \(training.time)")
                         Text("Date \(training.date)")
                         Text("Description \(training.description)")
-                        Text("Trainer Name \(training.trainer.fistName)")
+                        Text("Trainer Name \(training.trainer)")
                         makeParticipantsView(participants: training.participants)
                     }
                     .padding()

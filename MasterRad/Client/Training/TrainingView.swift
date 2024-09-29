@@ -108,14 +108,8 @@ struct TrainingView: View {
             Text("Trener: ")
                 .font(.headline)
             HStack {
-                Text(viewModel.training.trainer.fistName)
+                Text(viewModel.training.trainer)
                     .font(.headline)
-                Text(viewModel.training.trainer.lastName)
-                    .font(.headline)
-            }
-            .onTapGesture {
-                //TODO: Implement Trainer profile
-//                sharedData.navigate(destination: .trainer)
             }
             Spacer()
         }

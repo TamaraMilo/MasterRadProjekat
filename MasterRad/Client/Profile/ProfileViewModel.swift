@@ -31,7 +31,6 @@ final class ProfileViewModel: ObservableObject {
         authWebRepository.signOutUser()
         // TODO: Pop child
         rootEventTracker.openLoginSubject.send()
-
     }
     
     

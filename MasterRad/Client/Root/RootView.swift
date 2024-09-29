@@ -35,6 +35,7 @@ struct RootView: View {
     RootView(
         viewModel: RootViewModel(
             authWebRepository: AuthWebRepository(),
+            userWebRepository: UserWebRepository(),
             rootEventTracker: RootEventTracker()
         ),
         loginCoordinator: LoginCoordinator(

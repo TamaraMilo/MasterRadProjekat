@@ -12,12 +12,14 @@ struct UserData: Decodable, Identifiable {
     var firstName: String
     var lastName: String
     var age: String
+    var role: String
         
-    init(id: String, firstName: String, lastName: String, age: String) {
+    init(id: String, firstName: String, lastName: String, age: String, role: String) {
         self.id = id
         self.firstName = firstName
         self.lastName = lastName
         self.age = age
+        self.role = role
     }
     
     init() {
@@ -25,5 +27,6 @@ struct UserData: Decodable, Identifiable {
         firstName = ""
         lastName = ""
         age = ""
+        role = ""
     }
 }
