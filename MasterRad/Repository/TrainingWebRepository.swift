@@ -66,9 +66,24 @@ class TrainingWebRepository: TrainingRepository {
                 do {
                     let trainingData = data[key]
                     let trainingJson = try JSONSerialization.data(withJSONObject: trainingData)
-                    let training = try JSONDecoder().decode(Training.self, from: trainingJson)
+                    let trainingW = try JSONDecoder().decode(TrainingW.self, from: trainingJson)
+                    let participantsDataedw = trainingData as! NSDictionary
+                    let participantsData = participantsDataedw["participants"]
+                    let participantsJson = try JSONSerialization.data(withJSONObject: participantsData)
+                    let participants = try JSONDecoder().decode([UserData].self, from: trainingJson)
                     
-                    trainings.append(training   )
+                    var traingno = Training()
+                    traingno.id = trainingW.id
+                    traingno.name = trainingW.name
+                    traingno.date = trainingW.date
+                    traingno.time = trainingW.time
+                    traingno.description = trainingW.description
+                    traingno.trainer = trainingW.trainer
+                    traingno.participants = participants
+                    
+
+                    
+                    trainings.append(traingno)
                 } catch {
                     print("Error")
                 }

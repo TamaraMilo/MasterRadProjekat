@@ -23,7 +23,8 @@ class LoginCoordinator<Dependency> where Dependency: LoginDependency {
             LoginView(
                 viewModel: LoginViewModel(
                     webRepository: dependency.webRepository,
-                    rootEventTracker: dependency.rootEventTracker
+                    rootEventTracker: dependency.rootEventTracker,
+                    userWebRepository: dependency.userWebRepository
                 )
             )
         )

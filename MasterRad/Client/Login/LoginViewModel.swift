@@ -17,13 +17,19 @@ final class LoginViewModel: ObservableObject {
     private var disposables = Set<AnyCancellable>()
     private var webRepository: AuthRepository
     private var rootEventTracker: RootEventTracker
+    private var userWebRepository: UserRepository
 
     
     var alertText: String = ""
     
-    init(webRepository: AuthRepository, rootEventTracker: RootEventTracker) {
+    init(
+        webRepository: AuthRepository,
+        rootEventTracker: RootEventTracker,
+        userWebRepository: UserRepository
+    ) {
         self.webRepository = webRepository
         self.rootEventTracker = rootEventTracker
+        self.userWebRepository = userWebRepository
     }
 }
 
@@ -42,7 +48,8 @@ extension LoginViewModel {
                 }
             }, receiveValue: { [weak self] user in
                 guard let self else { return }
-                openApplication()
+                checkAuthentication(id: user.uid)
+                print(user.uid)
             })
             .store(in: &disposables)
     }
@@ -60,9 +67,29 @@ private extension LoginViewModel {
         return credentialsEntered
     }
     
-    func openApplication() {
-         rootEventTracker.openApplicationSubject.send(())
+    func checkAuthentication(id: String) {
+        userWebRepository.getUserData(id: id)
+            .sink(receiveCompletion: {result in
+                switch result {
+                case .finished: break
+                case .failure(let failure):
+                    print(failure.localizedDescription)
+                }
+                
+            }, receiveValue: {[weak self] data in
+                guard let self, let data else { return }
+                print(data)
+                if data.role == "client" {
+                    rootEventTracker.openApplicationSubject.send()
+                } else {
+                    rootEventTracker.openVendorSubject.send()
+                    print("vendor")
+                }
+            })
+            .store(in: &disposables)
     }
+    
+
 }
 
 extension LoginViewModel {

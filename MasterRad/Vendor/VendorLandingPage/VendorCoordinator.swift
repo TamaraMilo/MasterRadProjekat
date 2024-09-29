@@ -22,8 +22,13 @@ class VendorCoordinator<Dependency> where Dependency: VendorInjectable {
     
     var view: AnyView {
         AnyView(
-            VendorView(coordinator: self)
-                .environmentObject(dependency.sharedData)
+            VendorView(
+                viewModel: VendorViewModel(
+                    authWebRepository: dependency.authWebRepository,
+                    rootEventTracker: dependency.rootEventTracker
+                ), coordinator: self
+            )
+            .environmentObject(dependency.sharedData)
         )
     }
 }

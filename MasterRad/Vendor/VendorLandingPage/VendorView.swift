@@ -11,6 +11,8 @@ struct VendorView: View {
     
     @State private var startAnimation: Bool = false
     @EnvironmentObject var sharedData: VendorSharedData
+    @ObservedObject var viewModel: VendorViewModel
+    
     var coordinator: any VendorCoordinable
     
     var body: some View {
@@ -88,7 +90,7 @@ extension VendorView {
     
     var logoutButtonView: some View {
         Button {
-            
+            viewModel.logout()
         } label: {
             Text("Logout ")
                 .foregroundStyle(.white)
@@ -144,9 +146,14 @@ extension VendorView {
 
 #Preview {
     VendorView(
-        coordinator: VendorCoordinator(
+        viewModel: VendorViewModel(
+            authWebRepository: AuthWebRepository(),
+            rootEventTracker: RootEventTracker()
+        ), coordinator: VendorCoordinator(
             dependency: VendorDependency(
-                sharedData: VendorSharedData()
+                sharedData: VendorSharedData(),
+                rootEventTracker: RootEventTracker(),
+                authWebRepository: AuthWebRepository()
             )
         )
     )

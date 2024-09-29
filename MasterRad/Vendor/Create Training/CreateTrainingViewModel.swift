@@ -8,9 +8,9 @@
 import Foundation
 final class CreateTrainingViewModel: ObservableObject {
     @Published var training: Training = Training()
-    
+    var trainingWebRepository = TrainingWebRepository()
     
     func createTraining() {
-        // TODO
+        trainingWebRepository.createTraining(name: training.name, date: training.date, time: training.time, trainer: training.trainer, description: training.description)
     }
 }

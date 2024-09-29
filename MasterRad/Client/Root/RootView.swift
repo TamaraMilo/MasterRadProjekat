@@ -41,7 +41,8 @@ struct RootView: View {
         loginCoordinator: LoginCoordinator(
             dependency: LoginDependency(
                 webRepository: AuthWebRepository(),
-                rootEventTracker: RootEventTracker()
+                rootEventTracker: RootEventTracker(),
+                userWebRepository: UserWebRepository()
             )
         ),
         registerCoordinator: RegisterCoordinator(
@@ -58,6 +59,12 @@ struct RootView: View {
                 authWebRepository: AuthWebRepository()
             )
         ),
-        vendorCoordinator: VendorCoordinator(dependency: VendorDependency(sharedData: VendorSharedData()))
+        vendorCoordinator: VendorCoordinator(
+            dependency: VendorDependency(
+                sharedData: VendorSharedData(),
+                rootEventTracker: RootEventTracker(),
+                authWebRepository: AuthWebRepository()
+            )
+        )
     )
 }

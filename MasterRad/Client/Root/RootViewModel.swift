@@ -35,6 +35,7 @@ final class RootViewModel: ObservableObject {
         self.listenForOpenApplication()
         self.listenForOpenLogin()
         self.listenForOpenRegister()
+        self.listenForOpenVendor()
     }
 }
 
@@ -66,6 +67,16 @@ extension RootViewModel {
                 guard let self else { return }
                 authWebRepository.signOutUser()
                 state = .login
+            }
+            .store(in: &cancelSet)
+    }
+    
+    private func listenForOpenVendor() {
+        rootEventTracker.openVendorSubject
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] in
+                guard let self else { return }
+                state = .vendor
             }
             .store(in: &cancelSet)
     }

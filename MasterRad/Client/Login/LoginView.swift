@@ -132,5 +132,11 @@ struct LoginView: View {
 }
 
 #Preview {
-    LoginView(viewModel: LoginViewModel(webRepository: AuthWebRepository(), rootEventTracker: RootEventTracker()))
+    LoginView(
+        viewModel: LoginViewModel(
+            webRepository: AuthWebRepository(),
+            rootEventTracker: RootEventTracker(),
+            userWebRepository: UserWebRepository()
+        )
+    )
 }

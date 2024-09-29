@@ -45,7 +45,8 @@ extension RootCoordinator: RootCoordinable {
     var loginCoordinator: any LoginCoordinable {
         let dependency = LoginDependency(
             webRepository: dependency.authWebRepository,
-            rootEventTracker: dependency.rootEventTracker
+            rootEventTracker: dependency.rootEventTracker,
+            userWebRepository: dependency.userWebRepository
         )
         return LoginCoordinator(dependency: dependency)
     }
@@ -69,7 +70,11 @@ extension RootCoordinator: RootCoordinable {
     }
     
     var vendorCoordinator: any VendorCoordinable {
-        let dependency = VendorDependency(sharedData: VendorSharedData())
+        let dependency = VendorDependency(
+            sharedData: VendorSharedData(),
+            rootEventTracker: dependency.rootEventTracker,
+            authWebRepository: dependency.authWebRepository
+        )
         return VendorCoordinator(dependency: dependency)
     }
 }
