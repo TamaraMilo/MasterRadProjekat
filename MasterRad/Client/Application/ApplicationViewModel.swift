@@ -26,7 +26,7 @@ final class ApplicationViewModel: ObservableObject {
         fetchTrainings()
     }
     
-    func fetchTrainings() {
+    func fetchTrainings1() {
         trainingWebRepository.getTrainings()
             .sink(receiveCompletion: { [weak self] result in
                 switch result {
@@ -40,25 +40,28 @@ final class ApplicationViewModel: ObservableObject {
                 
                 for training in trainings {
                     let day = self?.mapDay(training: training)
+                    //remove duplicates
                     self?.days.append(day!)
+//                    self?.days.insert(day!)
                 }
             })
             .store(in: &disposables)
     }
     
-    func mapDay(training: Training) -> Day {
+    func mapDay1(training: Training) -> Day {
         let convertedDate = String.toDate(from: training.date)
         let dateName = convertedDate?.description(with: .current).components(separatedBy: ",").first
 
         let day = Day(
             id: Int.random(in: 0...1000),
             name: dateName ?? training.date,
-            date: training.date,
+            date: convertedDate ?? Date(),
             trainings: []
         )
         
         return day
     }
+
  }
 
 extension String {
@@ -69,13 +72,64 @@ extension String {
     }
 }
 
+// MARK: ChatGPT
+extension ApplicationViewModel {
+    func mapDay(training: Training) -> Day {
+        // Convert the date string to a Date object
+        let convertedDate = String.toDate(from: training.date)
+        
+        // Extract the name of the day for display (e.g., Monday, Tuesday)
+        let dateName = convertedDate?.formatted(.dateTime.weekday(.wide)) ?? training.date
+        
+        return Day(
+            id: Int(convertedDate?.timeIntervalSince1970 ?? 0), // Use timestamp for unique id
+            name: dateName,
+            date: convertedDate ?? Date(),
+            trainings: []
+        )
+    }
+    
+    func fetchTrainings() {
+        trainingWebRepository.getTrainings()
+            .sink(receiveCompletion: { [weak self] result in
+                switch result {
+                case .finished: break
+                case .failure(let failure):
+                    print(failure.localizedDescription)
+                }
+            }, receiveValue: { [weak self] trainings in
+                print(trainings)
+                self?.trainings = trainings
+                
+                // Clear the existing days to avoid duplication
+                self?.days.removeAll()
+                
+                for training in trainings {
+                    // Convert the date string to Date
+                    let day = self?.mapDay(training: training)
+                    
+                    // Check if the day already exists in the days array
+                    if let day = day, let index = self?.days.firstIndex(where: { $0.date == day.date }) {
+                        // If the day exists, add the training to the existing day
+                        self?.days[index].trainings.append(training)
+                    } else {
+                        // If the day does not exist, create a new one
+                        var newDay = day!
+                        newDay.trainings = [training]
+                        self?.days.append(newDay)
+                    }
+                }
+            })
+            .store(in: &disposables)
+    }
 
 
+}
 
-struct Day: Identifiable {
-    let id: Int
+struct Day: Identifiable, Hashable {
+    var id: Int
     var name: String
-    var date: String = ""
+    var date: Date = Date()
     var trainings: [Training]
 }
 
@@ -103,7 +157,7 @@ extension Day {
         Day(
             id: 1,
             name: "Ponedeljak",
-            date: "29.09.2024.",
+//            date: "29.09.2024.",
             trainings: fixtureTrainingsForDay()
         )
     }
@@ -111,7 +165,7 @@ extension Day {
         Day(
             id: 2 ,
             name: "Utorak",
-            date: "30.09.2024.",
+//            date: "30.09.2024.",
             trainings: fixtureTrainingsForDay()
         )
     }

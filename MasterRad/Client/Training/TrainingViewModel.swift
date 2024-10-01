@@ -41,6 +41,7 @@ final class TreningViewModel: ObservableObject {
         } else {
             isAlreadyInTraining = true
             training.participants.append(user)
+            trainingWebRepository.addParticipant(trainingId: trainingId, user: user)
         }
         print(training.participants)
     }
@@ -48,6 +49,7 @@ final class TreningViewModel: ObservableObject {
     func removeUserFromTraining() {
         training.participants.removeAll(where: { $0.id == user.id })
         isAlreadyInTraining = false
+        //addParticipant()
     }
     
     
@@ -65,13 +67,17 @@ final class TreningViewModel: ObservableObject {
                 }
                 
             }, receiveValue:{[weak self] training, user in
-                guard let self, let user, let training else { return }
+                guard let self, let training else { return }
                 self.training = training
                 self.user = user
                 state = .ready
             })
             .store(in: &disposables)
     }
+    
+//    func addParticipant() {
+//        trainingWebRepository.updateParticipants(trainingId: trainingId, users: training.participants)
+//    }
 }
 
 extension TreningViewModel {

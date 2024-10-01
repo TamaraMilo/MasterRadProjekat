@@ -25,7 +25,7 @@ class SharedData: ObservableObject {
     @Published var navigationPath = NavigationPath()
     
     enum NavigationStates: Hashable {
-        case training
+        case training(id: String)
         case profile
     }
     

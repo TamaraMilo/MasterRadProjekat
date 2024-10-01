@@ -11,7 +11,7 @@ import SwiftUI
 protocol ApplicationCoordinable: Coordinable {
     var profileCoordinator: any ProfileCoordinable { get }
     func makeTrainerCoordinator(trainer: Trainer) -> any TrainerCoordinable
-    func makeTrainingCoordinator(training: Binding<Training>) -> any TrainingCoordinable
+    func makeTrainingCoordinator(trainingId: String) -> any TrainingCoordinable
 }
 
 class ApplicationCoordinator<Dependency> where Dependency: ApplicationDependency {
@@ -49,7 +49,12 @@ extension ApplicationCoordinator: ApplicationCoordinable {
         TrainerCoordinator(dependency: TrainerDependency(trainer: trainer))
     }
     
-    func makeTrainingCoordinator(training: Binding<Training>) -> any TrainingCoordinable {
-        TrainingCoordinator(dependency: TrainingDependency(authWebRepository: AuthWebRepository(), userWebRepository: UserWebRepository()), training: training)
+    func makeTrainingCoordinator(trainingId: String) -> any TrainingCoordinable {
+        let  dependancy = TrainingDependency(
+            authWebRepository: AuthWebRepository(),
+            userWebRepository: UserWebRepository(),
+            trainingId: trainingId
+        )
+        return TrainingCoordinator(dependency: dependancy)
     }
 }

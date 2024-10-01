@@ -191,7 +191,3 @@ struct TrainingView: View {
 
     }
 }
-
-#Preview {
-//    TrainingView(training: Training(id: 1, name: "", date: "", trainer: Trainer()))
-}

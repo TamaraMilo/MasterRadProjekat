@@ -13,7 +13,7 @@ import SwiftUI
 protocol UserRepository {
     var ref: DatabaseReference { get }
     func getUserData(id: String) async -> UserData?
-    func getUserData(id: String) -> AnyPublisher<UserData?, Error>
+    func getUserData(id: String) -> AnyPublisher<UserData, Error>
     func createUser(id: String, name: String, surname: String, age: String)
     func updateUserData(userData: UserData)
 }
@@ -61,14 +61,18 @@ class UserWebRepository: UserRepository {
             .setValue(updatedValues)
     }
     
-    func getUserData(id: String) -> AnyPublisher<UserData?, Error> {
-        let subject = CurrentValueSubject<UserData?, Error>(UserData())
+    func getUserData(id: String) -> AnyPublisher<UserData, Error> {
+        let subject = CurrentValueSubject<UserData, Error>(UserData())
 
         let handle = ref.child("users").child(id).observe(.value, with: { snapshot in
-            let json = snapshot.value as! [String: Any]
-            
-            let userData = try? JSONDecoder().decode(UserData.self, from: JSONSerialization.data(withJSONObject: json))
-            subject.send(userData)
+            do {
+                let json = snapshot.value as! [String: Any]
+                
+                let userData = try JSONDecoder().decode(UserData.self, from: JSONSerialization.data(withJSONObject: json))
+                subject.send(userData)
+            } catch {
+                print("Jebi se")
+            }
 
         })
         

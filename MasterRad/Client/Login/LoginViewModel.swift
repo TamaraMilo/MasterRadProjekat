@@ -77,7 +77,7 @@ private extension LoginViewModel {
                 }
                 
             }, receiveValue: {[weak self] data in
-                guard let self, let data else { return }
+                guard let self else { return }
                 print(data)
                 if data.role == "client" {
                     rootEventTracker.openApplicationSubject.send()

@@ -22,8 +22,8 @@ struct ApplicationView: View {
                     switch state {
                     case .profile:
                         profileView
-                    case .training:
-                        trainingView
+                    case .training(let id):
+                        makeTrainingView(id: id)
                     }
                 }
         }
@@ -47,8 +47,8 @@ struct ApplicationView: View {
     }
     
     @ViewBuilder
-    var trainingView: some View {
-        coordinator.makeTrainingCoordinator(training: $training).view
+    func makeTrainingView(id: String) -> some View {
+        coordinator.makeTrainingCoordinator(trainingId: id).view
     }
     
     var backgroundView: some View {
@@ -97,15 +97,15 @@ extension ApplicationView {
 // MARK: Header
 
 extension ApplicationView {
-    var trainingDescriptionView: some View {
+    var trainingDescriptionView1: some View {
         TabView(selection: $viewModel.currentTab) {
-            ForEach(viewModel.days) { day in
+            ForEach(viewModel.days.sorted { $0.date < $1.date }) { day in
                 VStack(spacing: 30) {
                     Text(day.name)
                         .foregroundStyle(.white)
                         .font(.title)
                         .padding(.vertical, 20)
-                    makeTrainingDescription(trainings: viewModel.trainings.filter({ $0.date == day.date}))
+                    makeTrainingDescription(trainings: viewModel.trainings.filter({ $0.name == day.name}))
                 }
                 .tag(day.id)
             }
@@ -113,7 +113,25 @@ extension ApplicationView {
         .id(viewModel.currentTab)
         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
     }
-    
+    //gpt
+    var trainingDescriptionView: some View {
+        TabView(selection: $viewModel.currentTab) {
+            ForEach(viewModel.days.sorted(by: { $0.date < $1.date })) { day in
+                VStack(spacing: 30) {
+                    Text(day.name)
+                        .foregroundStyle(.white)
+                        .font(.title)
+                        .padding(.vertical, 20)
+                    makeTrainingDescription(trainings: day.trainings)
+                }
+                .tag(day.id) // Ensure the tag corresponds to a unique id (from the timestamp)
+            }
+        }
+        .id(viewModel.currentTab)
+        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+    }
+
+
     func makeTrainingDescription(trainings: [Training]) -> some View {
         ScrollView {
             ForEach(trainings) { training in
@@ -135,8 +153,7 @@ extension ApplicationView {
                         )
                 )
                 .onTapGesture {
-                    self.training = training
-                    sharedData.navigate(destination: .training)
+                    sharedData.navigate(destination: .training(id: training.id))
                 }
             }
         }

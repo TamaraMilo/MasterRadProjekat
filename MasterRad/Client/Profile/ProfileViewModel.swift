@@ -50,7 +50,7 @@ final class ProfileViewModel: ObservableObject {
         guard let user = authWebRepository.user else { return }
         state = .loading
         userWebRepository.getUserData(id: user.uid)
-            .sink(receiveCompletion: { [weak self] result in
+            .sink(receiveCompletion: { result in
                 switch result {
                 case .finished: break
                 case .failure(let failure):
@@ -58,7 +58,7 @@ final class ProfileViewModel: ObservableObject {
                 }
                 
             }, receiveValue: {[weak self] data in
-                guard let self, let data else { return }
+                guard let self else { return }
                 self.user = data
                 oldUserData = data
                 state = .ready

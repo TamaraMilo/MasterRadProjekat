@@ -96,7 +96,7 @@ extension RootViewModel {
                     }
                     
                 }, receiveValue: {[weak self] data in
-                    guard let self, let data else { return }
+                    guard let self else { return }
                     state = data.role == "client" ? .application : .vendor
                 })
                 .store(in: &cancelSet)

@@ -94,6 +94,10 @@ class TrainingWebRepository: TrainingRepository {
         })
     }
     
+//    func updateParticipants(trainingId: String, users: [UserData]) {
+//        ref.child("trainings").child(trainingId).child("participants").setValue(users as NSArray)
+//    }
+//    
     
 }
 
